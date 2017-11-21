@@ -12,7 +12,9 @@ Currently this is a work in progress.
 
 ## Steps (important commits)
 
-Below is a list of commits that may be interesting from the point of understanding the Design-By-Example development process. I marked some of the steps with the RED/GREEN/REFACTOR prefix so it's clear [which one of the stages](http://blog.cleancoder.com/uncle-bob/2014/12/17/TheCyclesOfTDD.html) the step belongs to. If you want to understand a step, I recommend pulling that state of code and reviewing it in Visual Studio. The list will be updated as new steps are done.
+Below is a list of commits that may be interesting from the point of understanding the Design-By-Example development process. I marked some of the steps with the RED/GREEN/REFACTOR prefix so it's clear [which one of the stages](http://blog.cleancoder.com/uncle-bob/2014/12/17/TheCyclesOfTDD.html) the step belongs to. Later, I remembered I could package a red-green-refactor cycles into pull requests (which I did).
+
+If you want to understand a step, I recommend pulling that state of code and reviewing it in Visual Studio. The list will be updated as new steps are done.
 
 * [RED: First test case - PressingNumberKeyDisplaysThatNumber](https://github.com/breki/calculator/commit/1c12d15b92217798e9e00d4d4eeb9e132ab74c92)
 * [RED: Created stub methods for the test case](https://github.com/breki/calculator/commit/f7d377c8bdceb4f5e8ab17095cf6f9ed82499011)
@@ -25,3 +27,4 @@ Below is a list of commits that may be interesting from the point of understandi
 * [REFACTOR: cleaned up CalculatorEngine a bit and made its interface more restrictive](https://github.com/breki/calculator/commit/5b2b854edd674e0000fe8dcb55e3c8716e529405)
 * [PressingDotInbetweenDigitsDisplaysTheDot test case covered](https://github.com/breki/calculator/commit/96f5e4eb94a5626136930c631cdfae43c22cef89)
 * [IgnoresTheSecondDotKey test case covered](https://github.com/breki/calculator/commit/0af0400e59570f4b796f2b17081df7717dc2c552)
+* [ShowsZeroInitially test case covered](https://github.com/breki/calculator/pull/1/files)

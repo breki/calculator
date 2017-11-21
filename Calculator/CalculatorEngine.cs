@@ -14,13 +14,28 @@ namespace Calculator
 
         public IReadOnlyList<char> Display => keyChars;
 
-        public void PressKey(char keyChar)
+        public void PressKey(CalculatorKey keyPressed)
         {
             if (keyChars.Count == 1 && keyChars[0] == KeyZero)
                 keyChars.Clear();
 
-            if (keyChar == KeyDot && keyChars.Contains(KeyDot))
+            if (keyPressed == CalculatorKey.Dot)
+            {
+                if (keyChars.Contains(KeyDot))
+                    return;
+                
+                keyChars.Add(KeyDot);
                 return;
+            }
+
+            if (keyPressed == CalculatorKey.Clr)
+            {
+                keyChars.Clear();
+                keyChars.Add(KeyZero);
+                return;
+            }
+
+            char keyChar = (char)(keyPressed - CalculatorKey.K0 + '0');
 
             keyChars.Add(keyChar);
         }

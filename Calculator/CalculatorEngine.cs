@@ -1,17 +1,19 @@
-﻿namespace Calculator
+﻿using System.Collections.Generic;
+
+namespace Calculator
 {
     public class CalculatorEngine
     {
-        public int Display
+        public IList<char> Display
         {
-            get { return displayedNumber; }
+            get { return digits; }
         }
 
-        public void PressKey(int digit)
+        public void PressKey(char digit)
         {
-            displayedNumber = digit;
+            digits.Add(digit);
         }
 
-        private int displayedNumber;
+        private List<char> digits = new List<char>();
     }
 }

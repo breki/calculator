@@ -83,6 +83,7 @@ namespace Calculator.Tests
             AssertDisplayShowsZero();
         }
 
+        [TestCase(CalculatorKey.Equals)]
         [TestCase(CalculatorKey.Plus)]
         [TestCase(CalculatorKey.Minus)]
         public void EnteringDigitAfterOperatorKeyClearsThePreviousValueFromDisplay(

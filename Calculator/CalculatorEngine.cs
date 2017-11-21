@@ -73,6 +73,9 @@ namespace Calculator
                 case CalculatorKey.Minus:
                     newValue = -(valuesStack.Pop() - valuesStack.Pop());
                     break;
+                case CalculatorKey.Multiply:
+                    newValue = valuesStack.Pop() * valuesStack.Pop();
+                    break;
                 default:
                     throw new InvalidOperationException();
             }

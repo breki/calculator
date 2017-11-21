@@ -175,7 +175,7 @@ namespace Calculator.Tests
         {
             decimal expectedValue = EnterValue();
 
-            PressThePlusKey();
+            PressTheMultiplyKey();
             PressTheEqualsKey();
 
             AssertDisplayShowsValue(expectedValue * expectedValue);
@@ -239,6 +239,11 @@ namespace Calculator.Tests
         private void PressTheMinusKey()
         {
             calculator.PressKey(CalculatorKey.Minus);
+        }
+
+        private void PressTheMultiplyKey()
+        {
+            calculator.PressKey(CalculatorKey.Multiply);
         }
 
         private void PressTheKey(char keyChr)

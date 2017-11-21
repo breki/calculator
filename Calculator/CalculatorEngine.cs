@@ -50,24 +50,32 @@ namespace Calculator
                 return;
             }
 
-            if (keyChars.Count == 1 && keyChars[0] == CharZero)
-                ClearDisplay();
-
             if (keyPressed == CalculatorKey.Clr)
             {
                 Initialize();
                 return;
             }
 
-            if (clearDisplayOnNextDigit)
-            {
-                ClearDisplay();
-                clearDisplayOnNextDigit = false;
-            }
+            ClearDisplayIfNeeded();
 
             char keyChar = ConvertDigitKeyToCharacter(keyPressed);
 
             keyChars.Add(keyChar);
+        }
+
+        private void ClearDisplayIfNeeded()
+        {
+            bool displayShouldBeCleared = false;
+            if (clearDisplayOnNextDigit)
+                displayShouldBeCleared = true;
+            else if (keyChars.Count == 1 && keyChars[0] == CharZero)
+                displayShouldBeCleared = true;
+
+            if (!displayShouldBeCleared)
+                return;
+
+            ClearDisplay();
+            clearDisplayOnNextDigit = false;
         }
 
         private void ShowValue(decimal newValue)

@@ -160,6 +160,18 @@ namespace Calculator.Tests
             AssertDisplayShowsChars(digit1, digit2);
         }
 
+        [Test]
+        public void EnteringValueMinusValueEqualsSubtractsValues()
+        {
+            decimal value1 = EnterValue();
+            PressTheMinusKey();
+            decimal value2 = EnterValue();
+
+            PressTheEqualsKey();
+
+            AssertDisplayShowsValue(value1 - value2);
+        }
+
         [SetUp]
         public void Setup()
         {

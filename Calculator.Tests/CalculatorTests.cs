@@ -65,6 +65,16 @@ namespace Calculator.Tests
             ExpectDigitOnDisplay(CalculatorEngine.CharZero);
         }
 
+        [Test]
+        public void PressingEqualsKeyAfterDigitsDoesNothing()
+        {
+            char digit1 = PressADigitKey();
+            char dotChar = PressADotKey();
+            char digit2 = PressADigitKey();
+            PressTheEqualsKey();
+            ExpectDigitOnDisplay(digit1, dotChar, digit2);
+        }
+
         [SetUp]
         public void Setup()
         {
@@ -95,11 +105,16 @@ namespace Calculator.Tests
             calculator.PressKey(CalculatorKey.Clr);
         }
 
+        private void PressTheEqualsKey()
+        {
+            calculator.PressKey(CalculatorKey.Equals);
+        }
+
         private void ExpectDigitOnDisplay(params char[] expectedDigits)
         {
             Assert.That(
-                calculator.Display, 
-                Is.EqualTo(expectedDigits),
+                string.Concat(calculator.Display), 
+                Is.EqualTo(string.Concat(expectedDigits)),
                 "Calculator display does not show the expected number.");
         }
 

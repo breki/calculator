@@ -13,6 +13,7 @@
         K8,
         K9,
         Dot,
-        Clr
+        Clr,
+        Equals
     }
 }

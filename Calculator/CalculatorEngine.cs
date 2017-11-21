@@ -20,39 +20,60 @@ namespace Calculator
             switch (keyPressed)
             {
                 case CalculatorKey.Plus:
-                    currentOperator = keyPressed;
-                    StoreCurrentValue();
-                    clearDisplayOnNextDigit = true;
+                    HandlePlusKey(keyPressed);
                     return;
+
                 case CalculatorKey.Equals:
-                    if (currentOperator == null)
-                        return;
-
-                    StoreCurrentValue();
-
-                    if (valuesStack.Count > 0)
-                    {
-                        decimal newValue = valuesStack.Pop() + valuesStack.Pop();
-                        ShowValue(newValue);
-                    }
-
+                    HandleEqualsKey();
                     return;
+
                 case CalculatorKey.Dot:
-                    if (keyChars.Contains(CharDot))
-                        return;
-
-                    keyChars.Add(CharDot);
+                    HandleDotKey();
                     return;
+
                 case CalculatorKey.Clr:
-                    Initialize();
+                    HandleClrKey();
                     return;
             }
 
             ClearDisplayIfNeeded();
 
             char keyChar = ConvertDigitKeyToCharacter(keyPressed);
-
             keyChars.Add(keyChar);
+        }
+
+        private void HandlePlusKey(CalculatorKey keyPressed)
+        {
+            currentOperator = keyPressed;
+            StoreCurrentValue();
+            clearDisplayOnNextDigit = true;
+        }
+
+        private void HandleEqualsKey()
+        {
+            if (currentOperator == null)
+                return;
+
+            StoreCurrentValue();
+
+            if (valuesStack.Count > 0)
+            {
+                decimal newValue = valuesStack.Pop() + valuesStack.Pop();
+                ShowValue(newValue);
+            }
+        }
+
+        private void HandleDotKey()
+        {
+            if (keyChars.Contains(CharDot))
+                return;
+
+            keyChars.Add(CharDot);
+        }
+
+        private void HandleClrKey()
+        {
+            Initialize();
         }
 
         private void ClearDisplayIfNeeded()

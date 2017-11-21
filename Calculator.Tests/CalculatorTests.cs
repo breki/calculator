@@ -80,10 +80,7 @@ namespace Calculator.Tests
         [Test]
         public void PressingPlusKeyAndThenEqualsDoublesTheValue()
         {
-            char digit1 = PressADigitKey();
-            char dotChar = PressTheDotKey();
-            char digit2 = PressADigitKey();
-            decimal expectedValue = ParseDecimalFromChars(digit1, dotChar, digit2);
+            decimal expectedValue = EnterValue();
 
             PressThePlusKey();
             PressTheEqualsKey();
@@ -102,11 +99,33 @@ namespace Calculator.Tests
             AssertDisplayShowsChars(digit1, digit2);
         }
 
+        [Test]
+        public void EnteringValuePlusValueEqualsCalculatesSum()
+        {
+            decimal value1 = EnterValue();
+            PressThePlusKey();
+            decimal value2 = EnterValue();
+
+            PressTheEqualsKey();
+
+            AssertDisplayShowsValue(value1 + value2);
+        }
+
         [SetUp]
         public void Setup()
         {
             calculator = new CalculatorEngine();
             rnd = new Random(123);
+        }
+
+        private decimal EnterValue()
+        {
+            decimal value = (decimal)(rnd.NextDouble() * rnd.NextDouble());
+            string valueStr = value.ToString(CultureInfo.InvariantCulture);
+            foreach (char c in valueStr)
+                PressTheKey(c);
+
+            return value;
         }
 
         private char PressADigitKey()
@@ -140,6 +159,16 @@ namespace Calculator.Tests
         private void PressThePlusKey()
         {
             calculator.PressKey(CalculatorKey.Plus);
+        }
+
+        private void PressTheKey(char keyChr)
+        {
+            if (char.IsDigit(keyChr))
+                calculator.PressKey(CalculatorKey.K0 + keyChr - CalculatorEngine.CharZero);
+            else if (keyChr == CalculatorEngine.CharDot)
+                calculator.PressKey(CalculatorKey.Dot);
+            else
+                throw new ArgumentException();
         }
 
         private static decimal ParseDecimalFromChars(params char[] expectedChars)

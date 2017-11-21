@@ -37,6 +37,7 @@ namespace Calculator
 
             if (keyPressed == CalculatorKey.Plus)
             {
+                currentOperator = keyPressed;
                 StoreCurrentValue();
                 clearDisplayOnNextDigit = true;
                 return;
@@ -44,9 +45,14 @@ namespace Calculator
 
             if (keyPressed == CalculatorKey.Equals)
             {
-                if (storedValue != 0m)
+                if (currentOperator == null)
+                    return;
+
+                StoreCurrentValue();
+
+                if (valuesStack.Count > 0)
                 {
-                    decimal newValue = storedValue * 2;
+                    decimal newValue = valuesStack.Pop() + valuesStack.Pop();
                     ShowValue(newValue);
                 }
 
@@ -83,7 +89,7 @@ namespace Calculator
 
         private void StoreCurrentValue()
         {
-            storedValue = decimal.Parse(string.Concat(keyChars), CultureInfo.InvariantCulture);
+            valuesStack.Push(decimal.Parse(string.Concat(keyChars), CultureInfo.InvariantCulture));
         }
 
         private static char ConvertDigitKeyToCharacter(CalculatorKey keyPressed)
@@ -92,7 +98,8 @@ namespace Calculator
         }
 
         private readonly List<char> keyChars = new List<char>();
-        private decimal storedValue;
+        private readonly Stack<decimal> valuesStack = new Stack<decimal>();
         private bool clearDisplayOnNextDigit;
+        private CalculatorKey? currentOperator;
     }
 }

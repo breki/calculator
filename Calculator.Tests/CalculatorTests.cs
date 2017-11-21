@@ -8,7 +8,7 @@ namespace Calculator.Tests
         [Test]
         public void ShowsZeroInitially()
         {
-            ExpectDigitOnDisplay('0');
+            ExpectDigitOnDisplay(CalculatorEngine.KeyZero);
         }
 
         [Test]

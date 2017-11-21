@@ -18,7 +18,7 @@ namespace Calculator
         public void PressKey(CalculatorKey keyPressed)
         {
             if (keyChars.Count == 1 && keyChars[0] == CharZero)
-                keyChars.Clear();
+                ClearDisplay();
 
             if (keyPressed == CalculatorKey.Dot)
             {
@@ -31,7 +31,6 @@ namespace Calculator
 
             if (keyPressed == CalculatorKey.Clr)
             {
-                keyChars.Clear();
                 Initialize();
                 return;
             }
@@ -56,7 +55,7 @@ namespace Calculator
 
             if (clearDisplayOnNextDigit)
             {
-                keyChars.Clear();
+                ClearDisplay();
                 clearDisplayOnNextDigit = false;
             }
 
@@ -67,14 +66,19 @@ namespace Calculator
 
         private void ShowValue(decimal newValue)
         {
-            keyChars.Clear();
+            ClearDisplay();
             keyChars.AddRange(newValue.ToString(CultureInfo.InvariantCulture).ToCharArray());
         }
 
         private void Initialize()
         {
-            keyChars.Clear();
+            ClearDisplay();
             keyChars.Add(CharZero);
+        }
+
+        private void ClearDisplay()
+        {
+            keyChars.Clear();
         }
 
         private void StoreCurrentValue()

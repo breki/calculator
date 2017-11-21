@@ -39,6 +39,13 @@ namespace Calculator.Tests
         }
 
         [Test]
+        public void PressingDotKeyAtStartDisplaysTheDotAfterZero()
+        {
+            PressTheDotKey();
+            AssertDisplayShowsChars(CalculatorEngine.CharZero, CalculatorEngine.CharDot);
+        }
+
+        [Test]
         public void PressingDotInbetweenDigitsDisplaysTheDot()
         {
             char digit1 = PressADigitKey();

@@ -44,6 +44,11 @@ namespace Calculator.Tests
             return digit;
         }
 
+        private void PressADotKey()
+        {
+            calculator.PressKey('.');
+        }
+
         private void ExpectDigitOnDisplay(params char[] expectedDigits)
         {
             Assert.That(calculator.Display, Is.EqualTo(expectedDigits));

@@ -28,3 +28,6 @@ If you want to understand a step, I recommend pulling that state of code and rev
 * [PressingDotInbetweenDigitsDisplaysTheDot test case covered](https://github.com/breki/calculator/commit/96f5e4eb94a5626136930c631cdfae43c22cef89)
 * [IgnoresTheSecondDotKey test case covered](https://github.com/breki/calculator/commit/0af0400e59570f4b796f2b17081df7717dc2c552)
 * [ShowsZeroInitially test case covered](https://github.com/breki/calculator/pull/1/files)
+* [IgnoresLeadingZeros test case covered](https://github.com/breki/calculator/pull/2/files)
+* [ClrKeyClearsTheDisplay test case covered](https://github.com/breki/calculator/pull/3/files)
+* [PressingEqualsKeyAfterDigitsDoesNothing test case covered](https://github.com/breki/calculator/pull/4/files)

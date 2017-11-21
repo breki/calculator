@@ -74,10 +74,12 @@ namespace Calculator.Tests
             AssertDisplayShowsZero();
         }
 
-        [Test]
-        public void PressingEqualsKeyAtStartDoesNothing()
+        [TestCase(CalculatorKey.Equals)]
+        [TestCase(CalculatorKey.Plus)]
+        [TestCase(CalculatorKey.Minus)]
+        public void PressingOperatorKeyAtStartDoesNothing(CalculatorKey operatorKey)
         {
-            PressTheEqualsKey();
+            PressTheKey(operatorKey);
             AssertDisplayShowsZero();
         }
 
@@ -89,13 +91,6 @@ namespace Calculator.Tests
             char digit2 = PressADigitKey();
             PressTheEqualsKey();
             AssertDisplayShowsChars(digit1, dotChar, digit2);
-        }
-
-        [Test]
-        public void PressingPlusKeyAtStartDoesNothing()
-        {
-            PressThePlusKey();
-            AssertDisplayShowsZero();
         }
 
         [Test]
@@ -130,13 +125,6 @@ namespace Calculator.Tests
             PressTheEqualsKey();
 
             AssertDisplayShowsValue(value1 + value2);
-        }
-
-        [Test]
-        public void PressingMinusKeyAtStartDoesNothing()
-        {
-            PressTheMinusKey();
-            AssertDisplayShowsZero();
         }
 
         [Test]
@@ -253,6 +241,11 @@ namespace Calculator.Tests
                 calculator.PressKey(CalculatorKey.Dot);
             else
                 throw new ArgumentException();
+        }
+
+        private void PressTheKey(CalculatorKey key)
+        {
+            calculator.PressKey(key);
         }
 
         private static decimal ParseDecimalFromChars(params char[] expectedChars)

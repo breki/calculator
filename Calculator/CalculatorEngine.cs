@@ -35,6 +35,9 @@ namespace Calculator
                 return;
             }
 
+            if (keyPressed == CalculatorKey.Equals)
+                return;
+
             char keyChar = ConvertDigitKeyToCharacter(keyPressed);
 
             keyChars.Add(keyChar);

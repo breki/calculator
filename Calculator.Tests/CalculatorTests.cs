@@ -8,24 +8,24 @@ namespace Calculator.Tests
         [Test]
         public void ShowsZeroInitially()
         {
-            ExpectDigitOnDisplay(CalculatorEngine.CharZero);
+            AssertDisplayShowsZero();
         }
 
         [Test]
         public void IgnoresLeadingZeros()
         {
-            PressZeroDigit();
-            PressZeroDigit();
-            PressZeroDigit();
+            PressTheZeroKey();
+            PressTheZeroKey();
+            PressTheZeroKey();
             char digit = PressADigitKey();
-            ExpectDigitOnDisplay(digit);
+            AssertDisplayShows(digit);
         }
 
         [Test]
         public void PressingDigitKeyDisplaysThatDigit()
         {
             char digit = PressADigitKey();
-            ExpectDigitOnDisplay(digit);
+            AssertDisplayShows(digit);
         }
 
         [Test]
@@ -33,7 +33,7 @@ namespace Calculator.Tests
         {
             char digit1 = PressADigitKey();
             char digit2 = PressADigitKey();
-            ExpectDigitOnDisplay(digit1, digit2);
+            AssertDisplayShows(digit1, digit2);
         }
 
         [Test]
@@ -41,19 +41,19 @@ namespace Calculator.Tests
         {
             char digit1 = PressADigitKey();
             char digit2 = PressADigitKey();
-            char dotChar = PressADotKey();
+            char dotChar = PressTheDotKey();
             char digit3 = PressADigitKey();
-            ExpectDigitOnDisplay(digit1, digit2, dotChar, digit3);
+            AssertDisplayShows(digit1, digit2, dotChar, digit3);
         }
 
         [Test]
         public void IgnoresTheSecondDotKey()
         {
             char digit1 = PressADigitKey();
-            char dotChar = PressADotKey();
+            char dotChar = PressTheDotKey();
             char digit2 = PressADigitKey();
-            PressADotKey();
-            ExpectDigitOnDisplay(digit1, dotChar, digit2);
+            PressTheDotKey();
+            AssertDisplayShows(digit1, dotChar, digit2);
         }
 
         [Test]
@@ -61,8 +61,18 @@ namespace Calculator.Tests
         {
             PressADigitKey();
             PressADigitKey();
-            PressClrKey();
-            ExpectDigitOnDisplay(CalculatorEngine.CharZero);
+            PressTheClrKey();
+            AssertDisplayShowsZero();
+        }
+
+        [Test]
+        public void PressingEqualsKeyAfterDigitsDoesNothing()
+        {
+            char digit1 = PressADigitKey();
+            char dotChar = PressTheDotKey();
+            char digit2 = PressADigitKey();
+            PressTheEqualsKey();
+            AssertDisplayShows(digit1, dotChar, digit2);
         }
 
         [SetUp]
@@ -79,27 +89,37 @@ namespace Calculator.Tests
             return (char)(digit - CalculatorKey.K0 + CalculatorEngine.CharZero);
         }
 
-        private void PressZeroDigit()
+        private void PressTheZeroKey()
         {
             calculator.PressKey(CalculatorKey.K0);
         }
 
-        private char PressADotKey()
+        private char PressTheDotKey()
         {
             calculator.PressKey(CalculatorKey.Dot);
             return CalculatorEngine.CharDot;
         }
 
-        private void PressClrKey()
+        private void PressTheClrKey()
         {
             calculator.PressKey(CalculatorKey.Clr);
         }
 
-        private void ExpectDigitOnDisplay(params char[] expectedDigits)
+        private void PressTheEqualsKey()
+        {
+            calculator.PressKey(CalculatorKey.Equals);
+        }
+
+        private void AssertDisplayShowsZero()
+        {
+            AssertDisplayShows(CalculatorEngine.CharZero);
+        }
+
+        private void AssertDisplayShows(params char[] expectedChars)
         {
             Assert.That(
-                calculator.Display, 
-                Is.EqualTo(expectedDigits),
+                string.Concat(calculator.Display), 
+                Is.EqualTo(string.Concat(expectedChars)),
                 "Calculator display does not show the expected number.");
         }
 

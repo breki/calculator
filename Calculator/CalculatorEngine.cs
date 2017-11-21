@@ -6,7 +6,7 @@ namespace Calculator
     {
         public CalculatorEngine()
         {
-            keyChars.Add(CharZero);
+            Initialize();
         }
 
         public const char CharDot = '.';
@@ -31,13 +31,19 @@ namespace Calculator
             if (keyPressed == CalculatorKey.Clr)
             {
                 keyChars.Clear();
-                keyChars.Add(CharZero);
+                Initialize();
                 return;
             }
 
             char keyChar = (char)(keyPressed - CalculatorKey.K0 + CharZero);
 
             keyChars.Add(keyChar);
+        }
+
+        private void Initialize()
+        {
+            keyChars.Clear();
+            keyChars.Add(CharZero);
         }
 
         private readonly List<char> keyChars = new List<char>();

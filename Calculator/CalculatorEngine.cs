@@ -4,15 +4,14 @@
     {
         public int Display
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
+            get { return displayedNumber; }
         }
 
         public void PressKey(int number)
         {
-            throw new System.NotImplementedException();
+            displayedNumber = number;
         }
+
+        private int displayedNumber;
     }
 }

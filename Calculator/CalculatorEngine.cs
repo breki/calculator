@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 
 namespace Calculator
@@ -57,11 +58,23 @@ namespace Calculator
 
             StoreCurrentValue();
 
-            if (valuesStack.Count > 0)
+            if (valuesStack.Count <= 0)
+                return;
+
+            decimal newValue;
+            switch (currentOperator)
             {
-                decimal newValue = valuesStack.Pop() + valuesStack.Pop();
-                ShowValue(newValue);
+                case CalculatorKey.Plus:
+                    newValue = valuesStack.Pop() + valuesStack.Pop();
+                    break;
+                case CalculatorKey.Minus:
+                    newValue = valuesStack.Pop() - valuesStack.Pop();
+                    break;
+                default:
+                    throw new InvalidOperationException();
             }
+
+            ShowValue(newValue);
         }
 
         private void HandleDotKey()
@@ -95,7 +108,10 @@ namespace Calculator
         private void ShowValue(decimal newValue)
         {
             ClearDisplay();
-            keyChars.AddRange(newValue.ToString(CultureInfo.InvariantCulture).ToCharArray());
+            if (newValue == 0)
+                keyChars.Add(CharZero);
+            else
+                keyChars.AddRange(newValue.ToString(CultureInfo.InvariantCulture).ToCharArray());
         }
 
         private void Initialize()

@@ -35,7 +35,7 @@ namespace Calculator
                 return;
             }
 
-            char keyChar = (char)(keyPressed - CalculatorKey.K0 + CharZero);
+            char keyChar = ConvertDigitKeyToCharacter(keyPressed);
 
             keyChars.Add(keyChar);
         }
@@ -44,6 +44,11 @@ namespace Calculator
         {
             keyChars.Clear();
             keyChars.Add(CharZero);
+        }
+
+        private static char ConvertDigitKeyToCharacter(CalculatorKey keyPressed)
+        {
+            return (char)(keyPressed - CalculatorKey.K0 + CharZero);
         }
 
         private readonly List<char> keyChars = new List<char>();

@@ -77,6 +77,7 @@ namespace Calculator.Tests
         [TestCase(CalculatorKey.Equals)]
         [TestCase(CalculatorKey.Plus)]
         [TestCase(CalculatorKey.Minus)]
+        [TestCase(CalculatorKey.Multiply)]
         public void PressingOperatorKeyAtStartDoesNothing(CalculatorKey operatorKey)
         {
             PressTheKey(operatorKey);

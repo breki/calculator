@@ -8,7 +8,7 @@ namespace Calculator.Tests
         [Test]
         public void ShowsZeroInitially()
         {
-            ExpectDigitOnDisplay(CalculatorEngine.KeyZero);
+            ExpectDigitOnDisplay(CalculatorEngine.CharZero);
         }
 
         [Test]
@@ -56,6 +56,15 @@ namespace Calculator.Tests
             ExpectDigitOnDisplay(digit1, dotChar, digit2);
         }
 
+        [Test]
+        public void ClrKeyClearsTheDisplay()
+        {
+            PressADigitKey();
+            PressADigitKey();
+            PressClrKey();
+            ExpectDigitOnDisplay(CalculatorEngine.CharZero);
+        }
+
         [SetUp]
         public void Setup()
         {
@@ -65,25 +74,33 @@ namespace Calculator.Tests
 
         private char PressADigitKey()
         {
-            char digit = (char)(rnd.Next(10) + '0');
+            CalculatorKey digit = rnd.Next(10) + CalculatorKey.K0;
             calculator.PressKey(digit);
-            return digit;
+            return (char)(digit - CalculatorKey.K0 + CalculatorEngine.CharZero);
         }
 
         private void PressZeroDigit()
         {
-            calculator.PressKey(CalculatorEngine.KeyZero);
+            calculator.PressKey(CalculatorKey.K0);
         }
 
         private char PressADotKey()
         {
-            calculator.PressKey(CalculatorEngine.KeyDot);
-            return CalculatorEngine.KeyDot;
+            calculator.PressKey(CalculatorKey.Dot);
+            return CalculatorEngine.CharDot;
+        }
+
+        private void PressClrKey()
+        {
+            calculator.PressKey(CalculatorKey.Clr);
         }
 
         private void ExpectDigitOnDisplay(params char[] expectedDigits)
         {
-            Assert.That(calculator.Display, Is.EqualTo(expectedDigits));
+            Assert.That(
+                calculator.Display, 
+                Is.EqualTo(expectedDigits),
+                "Calculator display does not show the expected number.");
         }
 
         private CalculatorEngine calculator;

@@ -52,14 +52,7 @@ namespace Calculator
 
                 if (valuesStack.Count > 0)
                 {
-                    decimal storedValue = valuesStack.Pop();
-
-                    decimal newValue;
-                    if (valuesStack.Count > 0)
-                        newValue = storedValue + valuesStack.Pop();
-                    else
-                        newValue = storedValue + valuesStack.Pop();
-
+                    decimal newValue = valuesStack.Pop() + valuesStack.Pop();
                     ShowValue(newValue);
                 }
 

@@ -18,20 +18,19 @@ namespace Calculator
         public void PressKey(CalculatorKey keyPressed)
         {
             if (keyChars.Count == 1 && keyChars[0] == CharZero)
-                keyChars.Clear();
+                ClearDisplay();
 
             if (keyPressed == CalculatorKey.Dot)
             {
                 if (keyChars.Contains(CharDot))
                     return;
-                
+
                 keyChars.Add(CharDot);
                 return;
             }
 
             if (keyPressed == CalculatorKey.Clr)
             {
-                keyChars.Clear();
                 Initialize();
                 return;
             }
@@ -39,6 +38,7 @@ namespace Calculator
             if (keyPressed == CalculatorKey.Plus)
             {
                 StoreCurrentValue();
+                clearDisplayOnNextDigit = true;
                 return;
             }
 
@@ -53,6 +53,12 @@ namespace Calculator
                 return;
             }
 
+            if (clearDisplayOnNextDigit)
+            {
+                ClearDisplay();
+                clearDisplayOnNextDigit = false;
+            }
+
             char keyChar = ConvertDigitKeyToCharacter(keyPressed);
 
             keyChars.Add(keyChar);
@@ -60,14 +66,19 @@ namespace Calculator
 
         private void ShowValue(decimal newValue)
         {
-            keyChars.Clear();
+            ClearDisplay();
             keyChars.AddRange(newValue.ToString(CultureInfo.InvariantCulture).ToCharArray());
         }
 
         private void Initialize()
         {
-            keyChars.Clear();
+            ClearDisplay();
             keyChars.Add(CharZero);
+        }
+
+        private void ClearDisplay()
+        {
+            keyChars.Clear();
         }
 
         private void StoreCurrentValue()
@@ -82,5 +93,6 @@ namespace Calculator
 
         private readonly List<char> keyChars = new List<char>();
         private decimal storedValue;
+        private bool clearDisplayOnNextDigit;
     }
 }

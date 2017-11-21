@@ -149,6 +149,17 @@ namespace Calculator.Tests
             AssertDisplayShowsZero();
         }
 
+        [Test]
+        public void EnteringDigitAfterMinusClearsThePreviousValueFromDisplay()
+        {
+            PressADigitKey();
+            PressTheMinusKey();
+            char digit1 = PressADigitKey();
+            char digit2 = PressADigitKey();
+
+            AssertDisplayShowsChars(digit1, digit2);
+        }
+
         [SetUp]
         public void Setup()
         {

@@ -6,6 +6,12 @@ namespace Calculator.Tests
     public class CalculatorTests
     {
         [Test]
+        public void ShowsZeroInitially()
+        {
+            ExpectDigitOnDisplay(CalculatorEngine.KeyZero);
+        }
+
+        [Test]
         public void PressingDigitKeyDisplaysThatDigit()
         {
             char digit = PressADigitKey();

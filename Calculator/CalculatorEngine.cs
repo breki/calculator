@@ -20,7 +20,8 @@ namespace Calculator
             switch (keyPressed)
             {
                 case CalculatorKey.Plus:
-                    HandlePlusKey(keyPressed);
+                case CalculatorKey.Minus:
+                    HandleOperatorKey(keyPressed);
                     return;
 
                 case CalculatorKey.Equals:
@@ -42,7 +43,7 @@ namespace Calculator
             keyChars.Add(keyChar);
         }
 
-        private void HandlePlusKey(CalculatorKey keyPressed)
+        private void HandleOperatorKey(CalculatorKey keyPressed)
         {
             currentOperator = keyPressed;
             StoreCurrentValue();

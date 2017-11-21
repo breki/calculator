@@ -16,5 +16,6 @@
         Clr,
         Equals,
         Plus,
+        Minus,
     }
 }

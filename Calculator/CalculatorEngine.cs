@@ -68,7 +68,7 @@ namespace Calculator
                     newValue = valuesStack.Pop() + valuesStack.Pop();
                     break;
                 case CalculatorKey.Minus:
-                    newValue = valuesStack.Pop() - valuesStack.Pop();
+                    newValue = -(valuesStack.Pop() - valuesStack.Pop());
                     break;
                 default:
                     throw new InvalidOperationException();

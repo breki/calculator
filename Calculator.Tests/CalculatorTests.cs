@@ -91,6 +91,17 @@ namespace Calculator.Tests
             AssertDisplayShowsValue(expectedValue * 2);
         }
 
+        [Test]
+        public void EnteringDigitAfterPlusClearsThePreviousValueFromDisplay()
+        {
+            PressADigitKey();
+            PressThePlusKey();
+            char digit1 = PressADigitKey();
+            char digit2 = PressADigitKey();
+
+            AssertDisplayShowsChars(digit1, digit2);
+        }
+
         [SetUp]
         public void Setup()
         {

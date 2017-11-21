@@ -4,13 +4,13 @@ namespace Calculator
 {
     public class CalculatorEngine
     {
-        public IReadOnlyList<char> Display => digits;
+        public IReadOnlyList<char> Display => keyChars;
 
-        public void PressKey(char digit)
+        public void PressKey(char keyChar)
         {
-            digits.Add(digit);
+            keyChars.Add(keyChar);
         }
 
-        private readonly List<char> digits = new List<char>();
+        private readonly List<char> keyChars = new List<char>();
     }
 }

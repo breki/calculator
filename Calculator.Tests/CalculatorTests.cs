@@ -75,6 +75,20 @@ namespace Calculator.Tests
             AssertDisplayShows(digit1, dotChar, digit2);
         }
 
+        [Test]
+        public void PressingPlusKeyAndThenEqualsDoublesTheValue()
+        {
+            char digit1 = PressADigitKey();
+            char dotChar = PressTheDotKey();
+            char digit2 = PressADigitKey();
+            decimal expectedValue = ConstructExpectedValue(digit1, dotChar, digit2);
+
+            PressThePlusKey();
+            PressTheEqualsKey();
+
+            AssertDisplayShows(expectedValue * 2);
+        }
+
         [SetUp]
         public void Setup()
         {

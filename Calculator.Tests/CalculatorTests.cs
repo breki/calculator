@@ -102,6 +102,22 @@ namespace Calculator.Tests
             AssertDisplayShowsChars(digit1, digit2);
         }
 
+        [Test]
+        public void EnteringValuePlusValueEqualsCalculatesSum()
+        {
+            char digit1 = PressADigitKey();
+            char dotChar = PressTheDotKey();
+            char digit2 = PressADigitKey();
+            decimal value1 = ParseDecimalFromChars(digit1, dotChar, digit2);
+            PressThePlusKey();
+            char digit3 = PressADigitKey();
+            char digit4 = PressADigitKey();
+            decimal value2 = ParseDecimalFromChars(digit3, dotChar, digit4);
+            PressTheEqualsKey();
+
+            AssertDisplayShowsValue(value1 + value2);
+        }
+
         [SetUp]
         public void Setup()
         {

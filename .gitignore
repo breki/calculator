@@ -5,3 +5,4 @@
 **/*.user
 **/StyleCop.Cache
 **/*.cache
+_Resharper.Caches/*

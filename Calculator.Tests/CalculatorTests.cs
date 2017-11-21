@@ -8,7 +8,7 @@ namespace Calculator.Tests
         [Test]
         public void ShowsZeroInitially()
         {
-            ExpectDigitOnDisplay(CalculatorEngine.KeyZero);
+            ExpectDigitOnDisplay(CalculatorEngine.CharZero);
         }
 
         [Test]
@@ -62,7 +62,7 @@ namespace Calculator.Tests
             PressADigitKey();
             PressADigitKey();
             PressClrKey();
-            ExpectDigitOnDisplay(CalculatorEngine.KeyZero);
+            ExpectDigitOnDisplay(CalculatorEngine.CharZero);
         }
 
         [SetUp]
@@ -76,7 +76,7 @@ namespace Calculator.Tests
         {
             CalculatorKey digit = rnd.Next(10) + CalculatorKey.K0;
             calculator.PressKey(digit);
-            return (char)(digit - CalculatorKey.K0 + '0');
+            return (char)(digit - CalculatorKey.K0 + CalculatorEngine.CharZero);
         }
 
         private void PressZeroDigit()
@@ -87,7 +87,7 @@ namespace Calculator.Tests
         private char PressADotKey()
         {
             calculator.PressKey(CalculatorKey.Dot);
-            return CalculatorEngine.KeyDot;
+            return CalculatorEngine.CharDot;
         }
 
         private void PressClrKey()

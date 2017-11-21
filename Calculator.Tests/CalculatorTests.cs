@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Globalization;
+using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using NUnit.Framework;
 
 namespace Calculator.Tests
@@ -18,14 +21,14 @@ namespace Calculator.Tests
             PressTheZeroKey();
             PressTheZeroKey();
             char digit = PressADigitKey();
-            AssertDisplayShows(digit);
+            AssertDisplayShowsChars(digit);
         }
 
         [Test]
         public void PressingDigitKeyDisplaysThatDigit()
         {
             char digit = PressADigitKey();
-            AssertDisplayShows(digit);
+            AssertDisplayShowsChars(digit);
         }
 
         [Test]
@@ -33,7 +36,7 @@ namespace Calculator.Tests
         {
             char digit1 = PressADigitKey();
             char digit2 = PressADigitKey();
-            AssertDisplayShows(digit1, digit2);
+            AssertDisplayShowsChars(digit1, digit2);
         }
 
         [Test]
@@ -43,7 +46,7 @@ namespace Calculator.Tests
             char digit2 = PressADigitKey();
             char dotChar = PressTheDotKey();
             char digit3 = PressADigitKey();
-            AssertDisplayShows(digit1, digit2, dotChar, digit3);
+            AssertDisplayShowsChars(digit1, digit2, dotChar, digit3);
         }
 
         [Test]
@@ -53,7 +56,7 @@ namespace Calculator.Tests
             char dotChar = PressTheDotKey();
             char digit2 = PressADigitKey();
             PressTheDotKey();
-            AssertDisplayShows(digit1, dotChar, digit2);
+            AssertDisplayShowsChars(digit1, dotChar, digit2);
         }
 
         [Test]
@@ -72,7 +75,7 @@ namespace Calculator.Tests
             char dotChar = PressTheDotKey();
             char digit2 = PressADigitKey();
             PressTheEqualsKey();
-            AssertDisplayShows(digit1, dotChar, digit2);
+            AssertDisplayShowsChars(digit1, dotChar, digit2);
         }
 
         [Test]
@@ -81,12 +84,12 @@ namespace Calculator.Tests
             char digit1 = PressADigitKey();
             char dotChar = PressTheDotKey();
             char digit2 = PressADigitKey();
-            decimal expectedValue = ConstructExpectedValue(digit1, dotChar, digit2);
+            decimal expectedValue = ParseDecimalFromChars(digit1, dotChar, digit2);
 
             PressThePlusKey();
             PressTheEqualsKey();
 
-            AssertDisplayShows(expectedValue * 2);
+            AssertDisplayShowsValue(expectedValue * 2);
         }
 
         [SetUp]
@@ -124,16 +127,34 @@ namespace Calculator.Tests
             calculator.PressKey(CalculatorKey.Equals);
         }
 
-        private void AssertDisplayShowsZero()
+        private void PressThePlusKey()
         {
-            AssertDisplayShows(CalculatorEngine.CharZero);
+            calculator.PressKey(CalculatorKey.Plus);
         }
 
-        private void AssertDisplayShows(params char[] expectedChars)
+        private static decimal ParseDecimalFromChars(params char[] expectedChars)
+        {
+            return decimal.Parse(string.Concat(expectedChars), CultureInfo.InvariantCulture);
+        }
+
+        private void AssertDisplayShowsZero()
+        {
+            AssertDisplayShowsChars(CalculatorEngine.CharZero);
+        }
+
+        private void AssertDisplayShowsChars(params char[] expectedChars)
         {
             Assert.That(
                 string.Concat(calculator.Display), 
                 Is.EqualTo(string.Concat(expectedChars)),
+                "Calculator display does not show the expected number.");
+        }
+
+        private void AssertDisplayShowsValue(decimal expectedValue)
+        {
+            Assert.That(
+                ParseDecimalFromChars(calculator.Display.ToArray()), 
+                Is.EqualTo(expectedValue),
                 "Calculator display does not show the expected number.");
         }
 

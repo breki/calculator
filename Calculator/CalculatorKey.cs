@@ -14,6 +14,7 @@
         K9,
         Dot,
         Clr,
-        Equals
+        Equals,
+        Plus,
     }
 }

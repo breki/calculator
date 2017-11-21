@@ -6,10 +6,10 @@ namespace Calculator.Tests
     public class CalculatorTests
     {
         [Test]
-        public void PressingNumberKeyDisplaysThatNumber()
+        public void PressingDigitKeyDisplaysThatDigit()
         {
-            int number = PressANumberKey();
-            ExpectNumberOnDisplay(number);
+            int digit = PressADigitKey();
+            ExpectDigitOnDisplay(digit);
         }
 
         [SetUp]
@@ -18,16 +18,16 @@ namespace Calculator.Tests
             calculator = new CalculatorEngine();
         }
 
-        private int PressANumberKey()
+        private int PressADigitKey()
         {
-            const int Number = 5;
-            calculator.PressKey(Number);
-            return Number;
+            const int Digit = 5;
+            calculator.PressKey(Digit);
+            return Digit;
         }
 
-        private void ExpectNumberOnDisplay(int number)
+        private void ExpectDigitOnDisplay(int digit)
         {
-            Assert.That(calculator.Display, Is.EqualTo(number));
+            Assert.That(calculator.Display, Is.EqualTo(digit));
         }
 
         private CalculatorEngine calculator;

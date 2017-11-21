@@ -7,9 +7,9 @@
             get { return displayedNumber; }
         }
 
-        public void PressKey(int number)
+        public void PressKey(int digit)
         {
-            displayedNumber = number;
+            displayedNumber = digit;
         }
 
         private int displayedNumber;

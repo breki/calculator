@@ -83,6 +83,19 @@ namespace Calculator.Tests
             AssertDisplayShowsZero();
         }
 
+        [TestCase(CalculatorKey.Plus)]
+        [TestCase(CalculatorKey.Minus)]
+        public void EnteringDigitAfterOperatorKeyClearsThePreviousValueFromDisplay(
+            CalculatorKey operatorKey)
+        {
+            PressADigitKey();
+            PressTheKey(operatorKey);
+            char digit1 = PressADigitKey();
+            char digit2 = PressADigitKey();
+
+            AssertDisplayShowsChars(digit1, digit2);
+        }
+
         [Test]
         public void PressingEqualsKeyAfterDigitsDoesNothing()
         {
@@ -105,17 +118,6 @@ namespace Calculator.Tests
         }
 
         [Test]
-        public void EnteringDigitAfterPlusClearsThePreviousValueFromDisplay()
-        {
-            PressADigitKey();
-            PressThePlusKey();
-            char digit1 = PressADigitKey();
-            char digit2 = PressADigitKey();
-
-            AssertDisplayShowsChars(digit1, digit2);
-        }
-
-        [Test]
         public void EnteringValuePlusValueEqualsCalculatesSum()
         {
             decimal value1 = EnterValue();
@@ -135,17 +137,6 @@ namespace Calculator.Tests
             PressTheEqualsKey();
 
             AssertDisplayShowsZero();
-        }
-
-        [Test]
-        public void EnteringDigitAfterMinusClearsThePreviousValueFromDisplay()
-        {
-            PressADigitKey();
-            PressTheMinusKey();
-            char digit1 = PressADigitKey();
-            char digit2 = PressADigitKey();
-
-            AssertDisplayShowsChars(digit1, digit2);
         }
 
         [Test]

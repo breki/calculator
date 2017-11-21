@@ -17,43 +17,35 @@ namespace Calculator
 
         public void PressKey(CalculatorKey keyPressed)
         {
-            if (keyPressed == CalculatorKey.Plus)
+            switch (keyPressed)
             {
-                currentOperator = keyPressed;
-                StoreCurrentValue();
-                clearDisplayOnNextDigit = true;
-                return;
-            }
-
-            if (keyPressed == CalculatorKey.Equals)
-            {
-                if (currentOperator == null)
+                case CalculatorKey.Plus:
+                    currentOperator = keyPressed;
+                    StoreCurrentValue();
+                    clearDisplayOnNextDigit = true;
                     return;
+                case CalculatorKey.Equals:
+                    if (currentOperator == null)
+                        return;
 
-                StoreCurrentValue();
+                    StoreCurrentValue();
 
-                if (valuesStack.Count > 0)
-                {
-                    decimal newValue = valuesStack.Pop() + valuesStack.Pop();
-                    ShowValue(newValue);
-                }
+                    if (valuesStack.Count > 0)
+                    {
+                        decimal newValue = valuesStack.Pop() + valuesStack.Pop();
+                        ShowValue(newValue);
+                    }
 
-                return;
-            }
-
-            if (keyPressed == CalculatorKey.Dot)
-            {
-                if (keyChars.Contains(CharDot))
                     return;
+                case CalculatorKey.Dot:
+                    if (keyChars.Contains(CharDot))
+                        return;
 
-                keyChars.Add(CharDot);
-                return;
-            }
-
-            if (keyPressed == CalculatorKey.Clr)
-            {
-                Initialize();
-                return;
+                    keyChars.Add(CharDot);
+                    return;
+                case CalculatorKey.Clr:
+                    Initialize();
+                    return;
             }
 
             ClearDisplayIfNeeded();

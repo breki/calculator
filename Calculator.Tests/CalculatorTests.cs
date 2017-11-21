@@ -70,6 +70,11 @@ namespace Calculator.Tests
             return digit;
         }
 
+        private void PressZeroDigit()
+        {
+            calculator.PressKey(CalculatorEngine.KeyZero);
+        }
+
         private char PressADotKey()
         {
             calculator.PressKey(CalculatorEngine.KeyDot);

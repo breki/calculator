@@ -110,9 +110,12 @@ namespace Calculator.Tests
             char digit2 = PressADigitKey();
             decimal value1 = ParseDecimalFromChars(digit1, dotChar, digit2);
             PressThePlusKey();
+
             char digit3 = PressADigitKey();
+            PressTheDotKey();
             char digit4 = PressADigitKey();
             decimal value2 = ParseDecimalFromChars(digit3, dotChar, digit4);
+
             PressTheEqualsKey();
 
             AssertDisplayShowsValue(value1 + value2);

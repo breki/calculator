@@ -20,6 +20,16 @@ namespace Calculator.Tests
             ExpectDigitOnDisplay(digit1, digit2);
         }
 
+        [Test]
+        public void PressingDotInbetweenDigitsDisplaysTheDot()
+        {
+            char digit1 = PressADigitKey();
+            char digit2 = PressADigitKey();
+            PressADotKey();
+            char digit3 = PressADigitKey();
+            ExpectDigitOnDisplay(digit1, digit2, '.', digit3);
+        }
+
         [SetUp]
         public void Setup()
         {

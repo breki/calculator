@@ -68,6 +68,13 @@ namespace Calculator.Tests
         }
 
         [Test]
+        public void PressingEqualsKeyAtStartDoesNothing()
+        {
+            PressTheEqualsKey();
+            AssertDisplayShowsZero();
+        }
+
+        [Test]
         public void PressingEqualsKeyAfterDigitsDoesNothing()
         {
             char digit1 = PressADigitKey();

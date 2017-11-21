@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 
 namespace Calculator.Tests
 {
@@ -9,6 +10,16 @@ namespace Calculator.Tests
         {
             int number = PressANumberKey();
             ExpectNumberOnDisplay(number);
+        }
+
+        private int PressANumberKey()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private void ExpectNumberOnDisplay(int number)
+        {
+            throw new NotImplementedException();
         }
     }
 }

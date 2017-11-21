@@ -17,6 +17,22 @@ namespace Calculator
 
         public void PressKey(CalculatorKey keyPressed)
         {
+            if (keyPressed == CalculatorKey.Equals)
+            {
+                if (currentOperator == null)
+                    return;
+
+                StoreCurrentValue();
+
+                if (valuesStack.Count > 0)
+                {
+                    decimal newValue = valuesStack.Pop() + valuesStack.Pop();
+                    ShowValue(newValue);
+                }
+
+                return;
+            }
+
             if (keyChars.Count == 1 && keyChars[0] == CharZero)
                 ClearDisplay();
 
@@ -40,22 +56,6 @@ namespace Calculator
                 currentOperator = keyPressed;
                 StoreCurrentValue();
                 clearDisplayOnNextDigit = true;
-                return;
-            }
-
-            if (keyPressed == CalculatorKey.Equals)
-            {
-                if (currentOperator == null)
-                    return;
-
-                StoreCurrentValue();
-
-                if (valuesStack.Count > 0)
-                {
-                    decimal newValue = valuesStack.Pop() + valuesStack.Pop();
-                    ShowValue(newValue);
-                }
-
                 return;
             }
 

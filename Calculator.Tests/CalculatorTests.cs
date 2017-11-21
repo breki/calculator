@@ -172,6 +172,19 @@ namespace Calculator.Tests
             AssertDisplayShowsValue(value1 - value2);
         }
 
+        [Test]
+        public void SubtractingLargerValueFromSmallerOneResultsInNegativeValue()
+        {
+            const decimal Value1 = 123123.454545m;
+            const decimal Value2 = 6573434.23232m;
+            TypeInValue(Value1);
+            PressTheMinusKey();
+            TypeInValue(Value2);
+            PressTheEqualsKey();
+
+            AssertDisplayShowsValue(Value1 - Value2);
+        }
+
         [SetUp]
         public void Setup()
         {
@@ -181,12 +194,17 @@ namespace Calculator.Tests
 
         private decimal EnterValue()
         {
-            decimal value = (decimal)(rnd.NextDouble() * rnd.NextDouble());
+            decimal value = (decimal)(rnd.NextDouble() * 100000);
+            TypeInValue(value);
+
+            return value;
+        }
+
+        private void TypeInValue(decimal value)
+        {
             string valueStr = value.ToString(CultureInfo.InvariantCulture);
             foreach (char c in valueStr)
                 PressTheKey(c);
-
-            return value;
         }
 
         private char PressADigitKey()

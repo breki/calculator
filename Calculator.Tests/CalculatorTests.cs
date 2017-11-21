@@ -12,14 +12,24 @@ namespace Calculator.Tests
             ExpectNumberOnDisplay(number);
         }
 
+        [SetUp]
+        public void Setup()
+        {
+            calculator = new CalculatorEngine();
+        }
+
         private int PressANumberKey()
         {
-            throw new System.NotImplementedException();
+            const int Number = 5;
+            calculator.PressKey(Number);
+            return Number;
         }
 
         private void ExpectNumberOnDisplay(int number)
         {
-            throw new NotImplementedException();
+            Assert.That(calculator.Display, Is.EqualTo(number));
         }
+
+        private CalculatorEngine calculator;
     }
 }

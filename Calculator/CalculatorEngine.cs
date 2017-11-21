@@ -8,6 +8,9 @@ namespace Calculator
 
         public void PressKey(char keyChar)
         {
+            if (keyChar == '.' && keyChars.Contains('.'))
+                return;
+
             keyChars.Add(keyChar);
         }
 

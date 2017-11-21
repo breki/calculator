@@ -30,6 +30,16 @@ namespace Calculator.Tests
             ExpectDigitOnDisplay(digit1, digit2, dotChar, digit3);
         }
 
+        [Test]
+        public void IgnoresTheSecondDotKey()
+        {
+            char digit1 = PressADigitKey();
+            char dotChar = PressADotKey();
+            char digit2 = PressADigitKey();
+            PressADotKey();
+            ExpectDigitOnDisplay(digit1, dotChar, digit2);
+        }
+
         [SetUp]
         public void Setup()
         {

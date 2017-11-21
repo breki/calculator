@@ -41,9 +41,6 @@ namespace Calculator
                 return;
             }
 
-            if (keyChars.Count == 1 && keyChars[0] == CharZero)
-                ClearDisplay();
-
             if (keyPressed == CalculatorKey.Dot)
             {
                 if (keyChars.Contains(CharDot))
@@ -52,6 +49,9 @@ namespace Calculator
                 keyChars.Add(CharDot);
                 return;
             }
+
+            if (keyChars.Count == 1 && keyChars[0] == CharZero)
+                ClearDisplay();
 
             if (keyPressed == CalculatorKey.Clr)
             {

@@ -170,6 +170,17 @@ namespace Calculator.Tests
             AssertDisplayShowsValue(Value1 - Value2);
         }
 
+        [Test]
+        public void PressingMultiplyKeyAndThenEqualsSquaresTheValue()
+        {
+            decimal expectedValue = EnterValue();
+
+            PressThePlusKey();
+            PressTheEqualsKey();
+
+            AssertDisplayShowsValue(expectedValue * expectedValue);
+        }
+
         [SetUp]
         public void Setup()
         {

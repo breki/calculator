@@ -17,6 +17,14 @@ namespace Calculator
 
         public void PressKey(CalculatorKey keyPressed)
         {
+            if (keyPressed == CalculatorKey.Plus)
+            {
+                currentOperator = keyPressed;
+                StoreCurrentValue();
+                clearDisplayOnNextDigit = true;
+                return;
+            }
+
             if (keyPressed == CalculatorKey.Equals)
             {
                 if (currentOperator == null)
@@ -48,14 +56,6 @@ namespace Calculator
             if (keyPressed == CalculatorKey.Clr)
             {
                 Initialize();
-                return;
-            }
-
-            if (keyPressed == CalculatorKey.Plus)
-            {
-                currentOperator = keyPressed;
-                StoreCurrentValue();
-                clearDisplayOnNextDigit = true;
                 return;
             }
 

@@ -53,6 +53,8 @@ namespace Calculator
 
         private void HandleEqualsKey()
         {
+            clearDisplayOnNextDigit = true;
+
             if (currentOperator == null)
                 return;
 

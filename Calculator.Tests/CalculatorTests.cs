@@ -85,6 +85,13 @@ namespace Calculator.Tests
         }
 
         [Test]
+        public void PressingPlusKeyAtStartDoesNothing()
+        {
+            PressThePlusKey();
+            AssertDisplayShowsZero();
+        }
+
+        [Test]
         public void PressingPlusKeyAndThenEqualsDoublesTheValue()
         {
             decimal expectedValue = EnterValue();

@@ -17,57 +17,78 @@ namespace Calculator
 
         public void PressKey(CalculatorKey keyPressed)
         {
-            if (keyChars.Count == 1 && keyChars[0] == CharZero)
-                ClearDisplay();
-
-            if (keyPressed == CalculatorKey.Dot)
+            switch (keyPressed)
             {
-                if (keyChars.Contains(CharDot))
+                case CalculatorKey.Plus:
+                    HandlePlusKey(keyPressed);
                     return;
 
-                keyChars.Add(CharDot);
-                return;
-            }
-
-            if (keyPressed == CalculatorKey.Clr)
-            {
-                Initialize();
-                return;
-            }
-
-            if (keyPressed == CalculatorKey.Plus)
-            {
-                currentOperator = keyPressed;
-                StoreCurrentValue();
-                clearDisplayOnNextDigit = true;
-                return;
-            }
-
-            if (keyPressed == CalculatorKey.Equals)
-            {
-                if (currentOperator == null)
+                case CalculatorKey.Equals:
+                    HandleEqualsKey();
                     return;
 
-                StoreCurrentValue();
+                case CalculatorKey.Dot:
+                    HandleDotKey();
+                    return;
 
-                if (valuesStack.Count > 0)
-                {
-                    decimal newValue = valuesStack.Pop() + valuesStack.Pop();
-                    ShowValue(newValue);
-                }
-
-                return;
+                case CalculatorKey.Clr:
+                    HandleClrKey();
+                    return;
             }
 
-            if (clearDisplayOnNextDigit)
-            {
-                ClearDisplay();
-                clearDisplayOnNextDigit = false;
-            }
+            ClearDisplayIfNeeded();
 
             char keyChar = ConvertDigitKeyToCharacter(keyPressed);
-
             keyChars.Add(keyChar);
+        }
+
+        private void HandlePlusKey(CalculatorKey keyPressed)
+        {
+            currentOperator = keyPressed;
+            StoreCurrentValue();
+            clearDisplayOnNextDigit = true;
+        }
+
+        private void HandleEqualsKey()
+        {
+            if (currentOperator == null)
+                return;
+
+            StoreCurrentValue();
+
+            if (valuesStack.Count > 0)
+            {
+                decimal newValue = valuesStack.Pop() + valuesStack.Pop();
+                ShowValue(newValue);
+            }
+        }
+
+        private void HandleDotKey()
+        {
+            if (keyChars.Contains(CharDot))
+                return;
+
+            keyChars.Add(CharDot);
+        }
+
+        private void HandleClrKey()
+        {
+            Initialize();
+        }
+
+        private void ClearDisplayIfNeeded()
+        {
+            bool displayShouldBeCleared = false;
+            if (clearDisplayOnNextDigit)
+                displayShouldBeCleared = true;
+            else if (keyChars.Count == 1 && keyChars[0] == CharZero)
+                displayShouldBeCleared = true;
+
+            if (!displayShouldBeCleared)
+                return;
+
+            ClearDisplay();
+            clearDisplayOnNextDigit = false;
         }
 
         private void ShowValue(decimal newValue)

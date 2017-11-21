@@ -39,6 +39,13 @@ namespace Calculator.Tests
         }
 
         [Test]
+        public void PressingDotKeyAtStartDisplaysTheDotAfterZero()
+        {
+            PressTheDotKey();
+            AssertDisplayShowsChars(CalculatorEngine.CharZero, CalculatorEngine.CharDot);
+        }
+
+        [Test]
         public void PressingDotInbetweenDigitsDisplaysTheDot()
         {
             char digit1 = PressADigitKey();
@@ -68,6 +75,13 @@ namespace Calculator.Tests
         }
 
         [Test]
+        public void PressingEqualsKeyAtStartDoesNothing()
+        {
+            PressTheEqualsKey();
+            AssertDisplayShowsZero();
+        }
+
+        [Test]
         public void PressingEqualsKeyAfterDigitsDoesNothing()
         {
             char digit1 = PressADigitKey();
@@ -75,6 +89,13 @@ namespace Calculator.Tests
             char digit2 = PressADigitKey();
             PressTheEqualsKey();
             AssertDisplayShowsChars(digit1, dotChar, digit2);
+        }
+
+        [Test]
+        public void PressingPlusKeyAtStartDoesNothing()
+        {
+            PressThePlusKey();
+            AssertDisplayShowsZero();
         }
 
         [Test]

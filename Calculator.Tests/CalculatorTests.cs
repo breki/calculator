@@ -80,10 +80,7 @@ namespace Calculator.Tests
         [Test]
         public void PressingPlusKeyAndThenEqualsDoublesTheValue()
         {
-            char digit1 = PressADigitKey();
-            char dotChar = PressTheDotKey();
-            char digit2 = PressADigitKey();
-            decimal expectedValue = ParseDecimalFromChars(digit1, dotChar, digit2);
+            decimal expectedValue = EnterValue();
 
             PressThePlusKey();
             PressTheEqualsKey();
@@ -105,16 +102,9 @@ namespace Calculator.Tests
         [Test]
         public void EnteringValuePlusValueEqualsCalculatesSum()
         {
-            char digit1 = PressADigitKey();
-            char dotChar = PressTheDotKey();
-            char digit2 = PressADigitKey();
-            decimal value1 = ParseDecimalFromChars(digit1, dotChar, digit2);
+            decimal value1 = EnterValue();
             PressThePlusKey();
-
-            char digit3 = PressADigitKey();
-            PressTheDotKey();
-            char digit4 = PressADigitKey();
-            decimal value2 = ParseDecimalFromChars(digit3, dotChar, digit4);
+            decimal value2 = EnterValue();
 
             PressTheEqualsKey();
 
@@ -126,6 +116,16 @@ namespace Calculator.Tests
         {
             calculator = new CalculatorEngine();
             rnd = new Random(123);
+        }
+
+        private decimal EnterValue()
+        {
+            decimal value = (decimal)(rnd.NextDouble() * rnd.NextDouble());
+            string valueStr = value.ToString(CultureInfo.InvariantCulture);
+            foreach (char c in valueStr)
+                PressTheKey(c);
+
+            return value;
         }
 
         private char PressADigitKey()
@@ -159,6 +159,16 @@ namespace Calculator.Tests
         private void PressThePlusKey()
         {
             calculator.PressKey(CalculatorKey.Plus);
+        }
+
+        private void PressTheKey(char keyChr)
+        {
+            if (char.IsDigit(keyChr))
+                calculator.PressKey(CalculatorKey.K0 + keyChr - CalculatorEngine.CharZero);
+            else if (keyChr == CalculatorEngine.CharDot)
+                calculator.PressKey(CalculatorKey.Dot);
+            else
+                throw new ArgumentException();
         }
 
         private static decimal ParseDecimalFromChars(params char[] expectedChars)

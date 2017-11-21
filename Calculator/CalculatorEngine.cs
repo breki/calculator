@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 
 namespace Calculator
 {
@@ -35,12 +36,32 @@ namespace Calculator
                 return;
             }
 
-            if (keyPressed == CalculatorKey.Equals)
+            if (keyPressed == CalculatorKey.Plus)
+            {
+                StoreCurrentValue();
                 return;
+            }
+
+            if (keyPressed == CalculatorKey.Equals)
+            {
+                if (storedValue != 0m)
+                {
+                    decimal newValue = storedValue * 2;
+                    ShowValue(newValue);
+                }
+
+                return;
+            }
 
             char keyChar = ConvertDigitKeyToCharacter(keyPressed);
 
             keyChars.Add(keyChar);
+        }
+
+        private void ShowValue(decimal newValue)
+        {
+            keyChars.Clear();
+            keyChars.AddRange(newValue.ToString(CultureInfo.InvariantCulture).ToCharArray());
         }
 
         private void Initialize()
@@ -49,11 +70,17 @@ namespace Calculator
             keyChars.Add(CharZero);
         }
 
+        private void StoreCurrentValue()
+        {
+            storedValue = decimal.Parse(string.Concat(keyChars), CultureInfo.InvariantCulture);
+        }
+
         private static char ConvertDigitKeyToCharacter(CalculatorKey keyPressed)
         {
             return (char)(keyPressed - CalculatorKey.K0 + CharZero);
         }
 
         private readonly List<char> keyChars = new List<char>();
+        private decimal storedValue;
     }
 }

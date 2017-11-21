@@ -24,7 +24,7 @@ namespace Calculator
             {
                 if (keyChars.Contains(CharDot))
                     return;
-                
+
                 keyChars.Add(CharDot);
                 return;
             }
@@ -39,6 +39,7 @@ namespace Calculator
             if (keyPressed == CalculatorKey.Plus)
             {
                 StoreCurrentValue();
+                clearDisplayOnNextDigit = true;
                 return;
             }
 
@@ -51,6 +52,12 @@ namespace Calculator
                 }
 
                 return;
+            }
+
+            if (clearDisplayOnNextDigit)
+            {
+                keyChars.Clear();
+                clearDisplayOnNextDigit = false;
             }
 
             char keyChar = ConvertDigitKeyToCharacter(keyPressed);
@@ -82,5 +89,6 @@ namespace Calculator
 
         private readonly List<char> keyChars = new List<char>();
         private decimal storedValue;
+        private bool clearDisplayOnNextDigit;
     }
 }

@@ -32,3 +32,4 @@ If you want to understand a step, I recommend pulling that state of code and rev
 * [ClrKeyClearsTheDisplay test case covered](https://github.com/breki/calculator/pull/3/files)
 * [PressingEqualsKeyAfterDigitsDoesNothing test case covered](https://github.com/breki/calculator/pull/4/files)
 * [PressingPlusKeyAndThenEqualsDoublesTheValue test case covered](https://github.com/breki/calculator/pull/5/files)
+* [EnteringDigitAfterPlusClearsThePreviousValueFromDisplay test case covered](https://github.com/breki/calculator/pull/6/files)

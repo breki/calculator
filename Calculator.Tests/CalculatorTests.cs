@@ -12,6 +12,16 @@ namespace Calculator.Tests
         }
 
         [Test]
+        public void IgnoresLeadingZeros()
+        {
+            PressZeroDigit();
+            PressZeroDigit();
+            PressZeroDigit();
+            char digit = PressADigitKey();
+            ExpectDigitOnDisplay(digit);
+        }
+
+        [Test]
         public void PressingDigitKeyDisplaysThatDigit()
         {
             char digit = PressADigitKey();
@@ -58,6 +68,11 @@ namespace Calculator.Tests
             char digit = (char)(rnd.Next(10) + '0');
             calculator.PressKey(digit);
             return digit;
+        }
+
+        private void PressZeroDigit()
+        {
+            calculator.PressKey(CalculatorEngine.KeyZero);
         }
 
         private char PressADotKey()

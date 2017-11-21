@@ -97,13 +97,15 @@ namespace Calculator.Tests
             AssertDisplayShowsChars(digit1, digit2);
         }
 
-        [Test]
-        public void PressingEqualsKeyAfterDigitsDoesNothing()
+        [TestCase(CalculatorKey.Equals)]
+        [TestCase(CalculatorKey.Plus)]
+        [TestCase(CalculatorKey.Minus)]
+        public void PressingOperatorKeyAfterDigitsDoesNothing(CalculatorKey operatorKey)
         {
             char digit1 = PressADigitKey();
             char dotChar = PressTheDotKey();
             char digit2 = PressADigitKey();
-            PressTheEqualsKey();
+            PressTheKey(operatorKey);
             AssertDisplayShowsChars(digit1, dotChar, digit2);
         }
 

@@ -110,13 +110,6 @@ namespace Calculator.Tests
         }
 
         [Test]
-        public void PressingMinusKeyAtStartDoesNothing()
-        {
-            PressTheMinusKey();
-            AssertDisplayShowsZero();
-        }
-
-        [Test]
         public void EnteringDigitAfterPlusClearsThePreviousValueFromDisplay()
         {
             PressADigitKey();
@@ -137,6 +130,23 @@ namespace Calculator.Tests
             PressTheEqualsKey();
 
             AssertDisplayShowsValue(value1 + value2);
+        }
+
+        [Test]
+        public void PressingMinusKeyAtStartDoesNothing()
+        {
+            PressTheMinusKey();
+            AssertDisplayShowsZero();
+        }
+
+        [Test]
+        public void PressingMinusKeyAndThenEqualsSetsValueToZero()
+        {
+            EnterValue();
+            PressTheMinusKey();
+            PressTheEqualsKey();
+
+            AssertDisplayShowsZero();
         }
 
         [SetUp]

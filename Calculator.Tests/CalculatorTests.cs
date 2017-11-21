@@ -25,9 +25,9 @@ namespace Calculator.Tests
         {
             char digit1 = PressADigitKey();
             char digit2 = PressADigitKey();
-            PressADotKey();
+            char dotChar = PressADotKey();
             char digit3 = PressADigitKey();
-            ExpectDigitOnDisplay(digit1, digit2, '.', digit3);
+            ExpectDigitOnDisplay(digit1, digit2, dotChar, digit3);
         }
 
         [SetUp]
@@ -44,9 +44,11 @@ namespace Calculator.Tests
             return digit;
         }
 
-        private void PressADotKey()
+        private char PressADotKey()
         {
-            calculator.PressKey('.');
+            const char DotChar = '.';
+            calculator.PressKey(DotChar);
+            return DotChar;
         }
 
         private void ExpectDigitOnDisplay(params char[] expectedDigits)

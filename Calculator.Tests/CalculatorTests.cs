@@ -110,6 +110,13 @@ namespace Calculator.Tests
         }
 
         [Test]
+        public void PressingMinusKeyAtStartDoesNothing()
+        {
+            PressTheMinusKey();
+            AssertDisplayShowsZero();
+        }
+
+        [Test]
         public void EnteringDigitAfterPlusClearsThePreviousValueFromDisplay()
         {
             PressADigitKey();
@@ -180,6 +187,11 @@ namespace Calculator.Tests
         private void PressThePlusKey()
         {
             calculator.PressKey(CalculatorKey.Plus);
+        }
+
+        private void PressTheMinusKey()
+        {
+            calculator.PressKey(CalculatorKey.Minus);
         }
 
         private void PressTheKey(char keyChr)

@@ -8,7 +8,7 @@ namespace Calculator.Tests
         [Test]
         public void ShowsZeroInitially()
         {
-            AssertDisplayShows(CalculatorEngine.CharZero);
+            AssertDisplayShowsZero();
         }
 
         [Test]
@@ -62,7 +62,7 @@ namespace Calculator.Tests
             PressADigitKey();
             PressADigitKey();
             PressTheClrKey();
-            AssertDisplayShows(CalculatorEngine.CharZero);
+            AssertDisplayShowsZero();
         }
 
         [Test]
@@ -108,6 +108,11 @@ namespace Calculator.Tests
         private void PressTheEqualsKey()
         {
             calculator.PressKey(CalculatorKey.Equals);
+        }
+
+        private void AssertDisplayShowsZero()
+        {
+            AssertDisplayShows(CalculatorEngine.CharZero);
         }
 
         private void AssertDisplayShows(params char[] expectedChars)

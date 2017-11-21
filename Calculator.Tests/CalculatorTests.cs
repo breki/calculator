@@ -8,28 +8,38 @@ namespace Calculator.Tests
         [Test]
         public void PressingDigitKeyDisplaysThatDigit()
         {
-            int digit = PressADigitKey();
+            char digit = PressADigitKey();
             ExpectDigitOnDisplay(digit);
+        }
+
+        [Test]
+        public void PressingTwoDigitKeysDisplaysBothDigitsInTheSameOrder()
+        {
+            char digit1 = PressADigitKey();
+            char digit2 = PressADigitKey();
+            ExpectDigitOnDisplay(digit1, digit2);
         }
 
         [SetUp]
         public void Setup()
         {
             calculator = new CalculatorEngine();
+            rnd = new Random(123);
         }
 
-        private int PressADigitKey()
+        private char PressADigitKey()
         {
-            const int Digit = 5;
-            calculator.PressKey(Digit);
-            return Digit;
+            char digit = (char)(rnd.Next(10) + '0');
+            calculator.PressKey(digit);
+            return digit;
         }
 
-        private void ExpectDigitOnDisplay(int digit)
+        private void ExpectDigitOnDisplay(params char[] expectedDigits)
         {
-            Assert.That(calculator.Display, Is.EqualTo(digit));
+            Assert.That(calculator.Display, Is.EqualTo(expectedDigits));
         }
 
         private CalculatorEngine calculator;
+        private Random rnd;
     }
 }

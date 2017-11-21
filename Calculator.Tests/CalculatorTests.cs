@@ -56,6 +56,15 @@ namespace Calculator.Tests
             ExpectDigitOnDisplay(digit1, dotChar, digit2);
         }
 
+        [Test]
+        public void ClrKeyClearsTheDisplay()
+        {
+            char digit1 = PressADigitKey();
+            char digit2 = PressADigitKey();
+            PressClrKey();
+            ExpectDigitOnDisplay(CalculatorEngine.KeyZero);
+        }
+
         [SetUp]
         public void Setup()
         {

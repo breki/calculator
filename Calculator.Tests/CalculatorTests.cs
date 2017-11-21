@@ -56,9 +56,8 @@ namespace Calculator.Tests
 
         private char PressADotKey()
         {
-            const char DotChar = '.';
-            calculator.PressKey(DotChar);
-            return DotChar;
+            calculator.PressKey(CalculatorEngine.KeyDot);
+            return CalculatorEngine.KeyDot;
         }
 
         private void ExpectDigitOnDisplay(params char[] expectedDigits)

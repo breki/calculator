@@ -4,11 +4,13 @@ namespace Calculator
 {
     public class CalculatorEngine
     {
+        public const char KeyDot = '.';
+
         public IReadOnlyList<char> Display => keyChars;
 
         public void PressKey(char keyChar)
         {
-            if (keyChar == '.' && keyChars.Contains('.'))
+            if (keyChar == KeyDot && keyChars.Contains(KeyDot))
                 return;
 
             keyChars.Add(keyChar);

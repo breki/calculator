@@ -89,6 +89,7 @@ namespace Calculator.Tests
         [TestCase(CalculatorKey.Plus)]
         [TestCase(CalculatorKey.Minus)]
         [TestCase(CalculatorKey.Multiply)]
+        [TestCase(CalculatorKey.Divide)]
         public void EnteringDigitAfterOperatorKeyClearsThePreviousValueFromDisplay(
             CalculatorKey operatorKey)
         {

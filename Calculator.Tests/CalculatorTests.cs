@@ -187,7 +187,9 @@ namespace Calculator.Tests
         [Test]
         public void PressingDivideKeyAndThenEqualsDividesTheValueWithItself()
         {
-            PressTheMultiplyKey();
+            EnterValue();
+
+            PressTheDivideKey();
             PressTheEqualsKey();
 
             AssertDisplayShowsValue(1);
@@ -256,6 +258,11 @@ namespace Calculator.Tests
         private void PressTheMultiplyKey()
         {
             calculator.PressKey(CalculatorKey.Multiply);
+        }
+
+        private void PressTheDivideKey()
+        {
+            calculator.PressKey(CalculatorKey.Divide);
         }
 
         private void PressTheKey(char keyChr)

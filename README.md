@@ -36,3 +36,4 @@ If you want to understand a step, I recommend pulling that state of code and rev
 * [EnteringValuePlusValueEqualsCalculatesSum test case covered](https://github.com/breki/calculator/pull/7/files) - Implements the first binary operation (adding two values). The values are now stored in a stack inside `CalculatorEngine`.
 * [Pressing equals key at start does nothing](https://github.com/breki/calculator/pull/8/files) - Cleaned up PressKey logic and also ensured the Equals, Dot and Plus keys do not clear the display when only the zero is displayed.
 * [Handling minus key, subtraction and negative values](https://github.com/breki/calculator/pull/9/files)
+* [Handling multiplication and division](https://github.com/breki/calculator/pull/10/files)

@@ -118,12 +118,12 @@ namespace Calculator.Tests
         [Test]
         public void PressingPlusKeyAndThenEqualsDoublesTheValue()
         {
-            decimal expectedValue = EnterValue();
+            decimal enteredValue = EnterValue();
 
             PressThePlusKey();
             PressTheEqualsKey();
 
-            AssertDisplayShowsValue(expectedValue * 2);
+            AssertDisplayShowsValue(enteredValue * 2);
         }
 
         [Test]
@@ -176,12 +176,12 @@ namespace Calculator.Tests
         [Test]
         public void PressingMultiplyKeyAndThenEqualsSquaresTheValue()
         {
-            decimal expectedValue = EnterValue();
+            decimal enteredValue = EnterValue();
 
             PressTheMultiplyKey();
             PressTheEqualsKey();
 
-            AssertDisplayShowsValue(expectedValue * expectedValue);
+            AssertDisplayShowsValue(enteredValue * enteredValue);
         }
 
         [Test, Ignore("todo")]

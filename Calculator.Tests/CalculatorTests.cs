@@ -105,6 +105,7 @@ namespace Calculator.Tests
         [TestCase(CalculatorKey.Plus)]
         [TestCase(CalculatorKey.Minus)]
         [TestCase(CalculatorKey.Multiply)]
+        [TestCase(CalculatorKey.Divide)]
         public void PressingOperatorKeyAfterDigitsDoesNothing(CalculatorKey operatorKey)
         {
             char digit1 = PressADigitKey();

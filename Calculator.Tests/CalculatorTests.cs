@@ -184,9 +184,16 @@ namespace Calculator.Tests
             AssertDisplayShowsValue(enteredValue * enteredValue);
         }
 
-        [Test, Ignore("todo")]
+        [Test]
         public void EnteringValueMultiplyValueEqualsMultipliesValues()
         {
+            decimal value1 = EnterValue();
+            PressTheMultiplyKey();
+            decimal value2 = EnterValue();
+
+            PressTheEqualsKey();
+
+            AssertDisplayShowsValue(value1 * value2);
         }
 
         [Test]

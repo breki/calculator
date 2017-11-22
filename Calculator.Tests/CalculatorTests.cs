@@ -184,6 +184,15 @@ namespace Calculator.Tests
             AssertDisplayShowsValue(expectedValue * expectedValue);
         }
 
+        [Test]
+        public void PressingDivideKeyAndThenEqualsDividesTheValueWithItself()
+        {
+            PressTheMultiplyKey();
+            PressTheEqualsKey();
+
+            AssertDisplayShowsValue(1);
+        }
+
         [SetUp]
         public void Setup()
         {

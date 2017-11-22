@@ -184,6 +184,11 @@ namespace Calculator.Tests
             AssertDisplayShowsValue(expectedValue * expectedValue);
         }
 
+        [Test, Ignore("todo")]
+        public void EnteringValueMultiplyValueEqualsMultipliesValues()
+        {
+        }
+
         [Test]
         public void PressingDivideKeyAndThenEqualsDividesTheValueWithItself()
         {
@@ -205,6 +210,16 @@ namespace Calculator.Tests
             PressTheEqualsKey();
 
             AssertDisplayShowsValue(value1 / value2);
+        }
+
+        [Test, Ignore("todo")]
+        public void DividingByZeroCausesTheDisplayToShowError()
+        {
+        }
+
+        [Test, Ignore("todo")]
+        public void LimitsHowManyCharactersAreDisplayed()
+        {
         }
 
         [SetUp]

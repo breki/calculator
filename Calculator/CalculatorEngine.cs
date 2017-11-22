@@ -23,6 +23,7 @@ namespace Calculator
                 case CalculatorKey.Plus:
                 case CalculatorKey.Minus:
                 case CalculatorKey.Multiply:
+                case CalculatorKey.Divide:
                     HandleOperatorKey(keyPressed);
                     return;
 

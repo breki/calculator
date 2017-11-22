@@ -78,7 +78,9 @@ namespace Calculator
                     newValue = valuesStack.Pop() * valuesStack.Pop();
                     break;
                 case CalculatorKey.Divide:
-                    newValue = valuesStack.Pop() / valuesStack.Pop();
+                    decimal divisor = valuesStack.Pop();
+                    decimal dividend = valuesStack.Pop();
+                    newValue = dividend / divisor;
                     break;
                 default:
                     throw new InvalidOperationException();

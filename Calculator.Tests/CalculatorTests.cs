@@ -195,6 +195,18 @@ namespace Calculator.Tests
             AssertDisplayShowsValue(1);
         }
 
+        [Test]
+        public void EnteringValueDivideValueEqualsDividesValues()
+        {
+            decimal value1 = EnterValue();
+            PressTheDivideKey();
+            decimal value2 = EnterValue();
+
+            PressTheEqualsKey();
+
+            AssertDisplayShowsValue(value1 / value2);
+        }
+
         [SetUp]
         public void Setup()
         {

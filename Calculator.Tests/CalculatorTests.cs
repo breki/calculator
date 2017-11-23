@@ -232,7 +232,8 @@ namespace Calculator.Tests
         [SetUp]
         public void Setup()
         {
-            calculator = new CalculatorEngine();
+            display = new CalculatorDisplay();
+            calculator = new CalculatorEngine(display);
             rnd = new Random(123);
         }
 
@@ -327,7 +328,7 @@ namespace Calculator.Tests
         private void AssertDisplayShowsChars(params char[] expectedChars)
         {
             Assert.That(
-                string.Concat(calculator.Display), 
+                display.Text, 
                 Is.EqualTo(string.Concat(expectedChars)),
                 "Calculator display does not show the expected number.");
         }
@@ -335,12 +336,13 @@ namespace Calculator.Tests
         private void AssertDisplayShowsValue(decimal expectedValue)
         {
             Assert.That(
-                ParseDecimalFromChars(calculator.Display.ToArray()), 
+                ParseDecimalFromChars(display.Text.ToArray()), 
                 Is.EqualTo(expectedValue),
                 "Calculator display does not show the expected number.");
         }
 
         private CalculatorEngine calculator;
         private Random rnd;
+        private CalculatorDisplay display;
     }
 }

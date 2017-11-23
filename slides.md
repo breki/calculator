@@ -1,11 +1,22 @@
 # Design By Example (a.k.a. Test-Driven Development)
 
 ## What is Design By Example?
-- A development process
+- Write the tests **before** writing the code itself
+- Development process that relies on repetition of short cycles (red-green-refactor)
+
+## Red-green-refactor cycle
+1. Red: create a test that fails
+2. Green: write production code that makes that test pass
+3. Refactor: clean up the mess you made
+- Robert C. Martin claims that cycle takes a minute or so
+  - So refactoring is done on a minute-by-minute basis (almost continuously)
+- I recommend micro-commits, after the end of each cycle
+  - This way you can always fall back to the previous state if the approach fails 
 
 ## Why Design By Example?
-- Encourages simple design
+- Encourages simple design (KISS, YAGNI)
 - Inspires confidence
+- Allows cheaper development of new features
 
 ## Common Misconceptions
 - Design By Example is not about testing
@@ -17,6 +28,12 @@
 - Breaking the existing habits:
    - the urge to write production code without tests
    - the urge not the clean the code after it starts to work
-- Learning to use development tools efficiently: 
+   - the urge to rely on (expensive) debugging sessions
+- 
+- Learning to use development tools efficiently:
+  - it is vital for refactoring
   - a good knowledge of Visual Studio / Resharper
   - learning keyboard shortcuts
+
+## Resources
+- See [My knowledgebase page on Software Design](https://breki.github.io/sw-design.html)

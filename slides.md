@@ -44,5 +44,8 @@
   - a good knowledge of Visual Studio / Resharper
   - learning keyboard shortcuts
 
+## Examples
+- [My calculator example](https://github.com/breki/calculator)
+
 ## Resources
 - See [My knowledgebase page on Software Design](https://breki.github.io/sw-design.html)

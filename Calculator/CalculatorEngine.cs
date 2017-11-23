@@ -6,15 +6,14 @@ namespace Calculator
 {
     public class CalculatorEngine
     {
-        public CalculatorEngine()
+        public CalculatorEngine(CalculatorDisplay display)
         {
+            this.display = display;
             Initialize();
         }
 
         public const char CharDot = '.';
         public const char CharZero = '0';
-
-        public IReadOnlyList<char> Display => keyChars;
 
         public void PressKey(CalculatorKey keyPressed)
         {
@@ -43,7 +42,13 @@ namespace Calculator
             ClearDisplayIfNeeded();
 
             char keyChar = ConvertDigitKeyToCharacter(keyPressed);
-            keyChars.Add(keyChar);
+            display.AddCharacter(keyChar);
+        }
+
+        private void Initialize()
+        {
+            ClearDisplay();
+            display.AddCharacter(CharZero);
         }
 
         private void HandleOperatorKey(CalculatorKey keyPressed)
@@ -80,6 +85,13 @@ namespace Calculator
                 case CalculatorKey.Divide:
                     decimal divisor = valuesStack.Pop();
                     decimal dividend = valuesStack.Pop();
+
+                    if (divisor == 0m)
+                    {
+                        display.DisplayErrorMessage();
+                        return;
+                    }
+
                     newValue = dividend / divisor;
                     break;
                 default:
@@ -91,10 +103,8 @@ namespace Calculator
 
         private void HandleDotKey()
         {
-            if (keyChars.Contains(CharDot))
-                return;
-
-            keyChars.Add(CharDot);
+            if (!display.ContainsDot)
+                display.AddCharacter(CharDot);
         }
 
         private void HandleClrKey()
@@ -107,7 +117,7 @@ namespace Calculator
             bool displayShouldBeCleared = false;
             if (clearDisplayOnNextDigit)
                 displayShouldBeCleared = true;
-            else if (keyChars.Count == 1 && keyChars[0] == CharZero)
+            else if (display.ShowsZero)
                 displayShouldBeCleared = true;
 
             if (!displayShouldBeCleared)
@@ -119,27 +129,17 @@ namespace Calculator
 
         private void ShowValue(decimal newValue)
         {
-            ClearDisplay();
-            if (newValue == 0)
-                keyChars.Add(CharZero);
-            else
-                keyChars.AddRange(newValue.ToString(CultureInfo.InvariantCulture).ToCharArray());
-        }
-
-        private void Initialize()
-        {
-            ClearDisplay();
-            keyChars.Add(CharZero);
+            display.DisplayValue(newValue);
         }
 
         private void ClearDisplay()
         {
-            keyChars.Clear();
+            display.Clear();
         }
 
         private void StoreCurrentValue()
         {
-            valuesStack.Push(decimal.Parse(string.Concat(keyChars), CultureInfo.InvariantCulture));
+            valuesStack.Push(decimal.Parse(display.Text, CultureInfo.InvariantCulture));
         }
 
         private static char ConvertDigitKeyToCharacter(CalculatorKey keyPressed)
@@ -147,9 +147,9 @@ namespace Calculator
             return (char)(keyPressed - CalculatorKey.K0 + CharZero);
         }
 
-        private readonly List<char> keyChars = new List<char>();
         private readonly Stack<decimal> valuesStack = new Stack<decimal>();
         private bool clearDisplayOnNextDigit;
         private CalculatorKey? currentOperator;
+        private readonly CalculatorDisplay display;
     }
 }

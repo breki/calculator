@@ -219,20 +219,35 @@ namespace Calculator.Tests
             AssertDisplayShowsValue(value1 / value2);
         }
 
-        [Test, Ignore("todo")]
+        [Test]
         public void DividingByZeroCausesTheDisplayToShowError()
         {
+            EnterValue();
+            PressTheDivideKey();
+            TypeInValue(0);
+
+            PressTheEqualsKey();
+
+            AssertDisplayShowsError();
         }
 
-        [Test, Ignore("todo")]
-        public void LimitsHowManyCharactersAreDisplayed()
+        [Test]
+        public void UsesRoundingToLimitHowManyCharactersAreDisplayed()
         {
+            TypeInValue(2);
+            PressTheDivideKey();
+            TypeInValue(3);
+
+            PressTheEqualsKey();
+
+            AssertDisplayShowsText("0.66666667");
         }
 
         [SetUp]
         public void Setup()
         {
-            calculator = new CalculatorEngine();
+            display = new CalculatorDisplay();
+            calculator = new CalculatorEngine(display);
             rnd = new Random(123);
         }
 
@@ -327,7 +342,7 @@ namespace Calculator.Tests
         private void AssertDisplayShowsChars(params char[] expectedChars)
         {
             Assert.That(
-                string.Concat(calculator.Display), 
+                display.Text, 
                 Is.EqualTo(string.Concat(expectedChars)),
                 "Calculator display does not show the expected number.");
         }
@@ -335,12 +350,29 @@ namespace Calculator.Tests
         private void AssertDisplayShowsValue(decimal expectedValue)
         {
             Assert.That(
-                ParseDecimalFromChars(calculator.Display.ToArray()), 
-                Is.EqualTo(expectedValue),
+                ParseDecimalFromChars(display.Text.ToArray()),
+                Is.EqualTo(Math.Round(expectedValue, 8)),
                 "Calculator display does not show the expected number.");
+        }
+
+        private void AssertDisplayShowsError()
+        {
+            Assert.That(
+                display.Text, 
+                Is.EqualTo(CalculatorDisplay.MsgError),
+                "Calculator display does not show the expected text.");
+        }
+
+        private void AssertDisplayShowsText(string expectedText)
+        {
+            Assert.That(
+                display.Text,
+                Is.EqualTo(expectedText),
+                "Calculator display does not show the expected text.");
         }
 
         private CalculatorEngine calculator;
         private Random rnd;
+        private CalculatorDisplay display;
     }
 }

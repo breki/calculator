@@ -79,6 +79,13 @@ namespace Calculator
                 case CalculatorKey.Divide:
                     decimal divisor = valuesStack.Pop();
                     decimal dividend = valuesStack.Pop();
+
+                    if (divisor == 0m)
+                    {
+                        display.DisplayErrorMessage();
+                        return;
+                    }
+
                     newValue = dividend / divisor;
                     break;
                 default:

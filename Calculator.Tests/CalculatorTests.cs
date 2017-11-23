@@ -219,9 +219,16 @@ namespace Calculator.Tests
             AssertDisplayShowsValue(value1 / value2);
         }
 
-        [Test, Ignore("todo")]
+        [Test]
         public void DividingByZeroCausesTheDisplayToShowError()
         {
+            EnterValue();
+            PressTheDivideKey();
+            TypeInValue(0);
+
+            PressTheEqualsKey();
+
+            AssertDisplayShowsError();
         }
 
         [Test, Ignore("todo")]
@@ -339,6 +346,14 @@ namespace Calculator.Tests
                 ParseDecimalFromChars(display.Text.ToArray()), 
                 Is.EqualTo(expectedValue),
                 "Calculator display does not show the expected number.");
+        }
+
+        private void AssertDisplayShowsError()
+        {
+            Assert.That(
+                display.Text, 
+                Is.EqualTo(CalculatorDisplay.MsgError),
+                "Calculator display does not show the expected text.");
         }
 
         private CalculatorEngine calculator;

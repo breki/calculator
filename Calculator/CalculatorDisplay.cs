@@ -19,11 +19,6 @@ namespace Calculator
             keyChars.Add(keyChar);
         }
 
-        public void AddCharacters(IEnumerable<char> characters)
-        {
-            keyChars.AddRange(characters);
-        }
-
         public void DisplayErrorMessage()
         {
             DisplayText(MsgError);
@@ -50,6 +45,11 @@ namespace Calculator
         {
             Clear();
             AddCharacters(text);
+        }
+
+        private void AddCharacters(IEnumerable<char> characters)
+        {
+            keyChars.AddRange(characters);
         }
 
         private readonly List<char> keyChars = new List<char>();

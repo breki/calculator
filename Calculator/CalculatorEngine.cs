@@ -45,6 +45,12 @@ namespace Calculator
             display.AddCharacter(keyChar);
         }
 
+        private void Initialize()
+        {
+            ClearDisplay();
+            display.AddCharacter(CharZero);
+        }
+
         private void HandleOperatorKey(CalculatorKey keyPressed)
         {
             currentOperator = keyPressed;
@@ -124,12 +130,6 @@ namespace Calculator
         private void ShowValue(decimal newValue)
         {
             display.DisplayValue(newValue);
-        }
-
-        private void Initialize()
-        {
-            ClearDisplay();
-            display.AddCharacter(CharZero);
         }
 
         private void ClearDisplay()

@@ -45,7 +45,8 @@
   - learning keyboard shortcuts
 
 ## Examples
-- [My calculator example](https://github.com/breki/calculator)
+- [calculator](https://github.com/breki/calculator) - example of developing a pocket calculator in C# using Design By Example process (by me)
+- [The Three Laws of TDD (Featuring Kotlin)](https://www.youtube.com/watch?v=qkblc5WRn-U)
 
 ## Resources
 - See [My knowledgebase page on Software Design](https://breki.github.io/sw-design.html)

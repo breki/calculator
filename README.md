@@ -22,7 +22,7 @@ If you want to understand a step, I recommend pulling that state of code and rev
 * [RED: Created the needed methods in CalculatorEngine as stubs](https://github.com/breki/calculator/commit/e29df4b966db983c7f8840f763602428fb657ee2)
 * [GREEN: Implemented a very naive versions of CalculatorEngine methods](https://github.com/breki/calculator/commit/d275258caf2f8151e0d147eb4460ff0e738c5375)
 * [REFACTOR: Renamed "number" to "digit" to avoid confusion](https://github.com/breki/calculator/commit/b9104cb2d9ae6b02d38e56678e21651ca819e11b)
-* [RED: Added new PressingTwoDigitKeysDisplaysBothDigitsInTheSameOrder test case](https://github.com/breki/calculator/commit/642d073cf9e8747818cce11ca4cd9e193387c841) - in hindsight, this one I should have probably broken into smaller chunks of work
+* [RED: Added new PressingTwoDigitKeysDisplaysBothDigitsInTheSameOrder test case](https://github.com/breki/calculator/commit/642d073cf9e8747818cce11ca4cd9e193387c841): in hindsight, this one I should have probably broken into smaller chunks of work
 * [GREEN: redesigned CalculatorEngine to pass both tests](https://github.com/breki/calculator/commit/b569f6753b1761495648f2d6bddd2eb75c1d09d0)
 * [REFACTOR: cleaned up CalculatorEngine a bit and made its interface more restrictive](https://github.com/breki/calculator/commit/5b2b854edd674e0000fe8dcb55e3c8716e529405)
 * [PressingDotInbetweenDigitsDisplaysTheDot test case covered](https://github.com/breki/calculator/commit/96f5e4eb94a5626136930c631cdfae43c22cef89)
@@ -33,7 +33,8 @@ If you want to understand a step, I recommend pulling that state of code and rev
 * [PressingEqualsKeyAfterDigitsDoesNothing test case covered](https://github.com/breki/calculator/pull/4/files)
 * [PressingPlusKeyAndThenEqualsDoublesTheValue test case covered](https://github.com/breki/calculator/pull/5/files)
 * [EnteringDigitAfterPlusClearsThePreviousValueFromDisplay test case covered](https://github.com/breki/calculator/pull/6/files)
-* [EnteringValuePlusValueEqualsCalculatesSum test case covered](https://github.com/breki/calculator/pull/7/files) - Implements the first binary operation (adding two values). The values are now stored in a stack inside `CalculatorEngine`.
-* [Pressing equals key at start does nothing](https://github.com/breki/calculator/pull/8/files) - Cleaned up PressKey logic and also ensured the Equals, Dot and Plus keys do not clear the display when only the zero is displayed.
+* [EnteringValuePlusValueEqualsCalculatesSum test case covered](https://github.com/breki/calculator/pull/7/files): implements the first binary operation (adding two values). The values are now stored in a stack inside `CalculatorEngine`.
+* [Pressing equals key at start does nothing](https://github.com/breki/calculator/pull/8/files): cleaned up `PressKey` logic and also ensured the `Equals`, `Dot` and `Plus` keys do not clear the display when only the zero is displayed.
 * [Handling minus key, subtraction and negative values](https://github.com/breki/calculator/pull/9/files)
 * [Handling multiplication and division](https://github.com/breki/calculator/pull/10/files)
+* [Decoupling the display from the engine](https://github.com/breki/calculator/pull/11): new `CalculatorDisplay` class now has a responsibility of displaying the text. `CalculatorEngine` uses it through the dependency injection.

@@ -231,9 +231,16 @@ namespace Calculator.Tests
             AssertDisplayShowsError();
         }
 
-        [Test, Ignore("todo")]
-        public void LimitsHowManyCharactersAreDisplayed()
+        [Test]
+        public void UsesRoundingToLimitsHowManyCharactersAreDisplayed()
         {
+            TypeInValue(2);
+            PressTheDivideKey();
+            TypeInValue(3);
+
+            PressTheEqualsKey();
+
+            AssertDisplayShowsText("0.66666667");
         }
 
         [SetUp]
@@ -353,6 +360,14 @@ namespace Calculator.Tests
             Assert.That(
                 display.Text, 
                 Is.EqualTo(CalculatorDisplay.MsgError),
+                "Calculator display does not show the expected text.");
+        }
+
+        private void AssertDisplayShowsText(string expectedText)
+        {
+            Assert.That(
+                display.Text,
+                Is.EqualTo(expectedText),
                 "Calculator display does not show the expected text.");
         }
 

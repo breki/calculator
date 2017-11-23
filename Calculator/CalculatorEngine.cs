@@ -123,11 +123,7 @@ namespace Calculator
 
         private void ShowValue(decimal newValue)
         {
-            ClearDisplay();
-            if (newValue == 0)
-                display.AddCharacter(CharZero);
-            else
-                display.AddCharacters(newValue.ToString(CultureInfo.InvariantCulture).ToCharArray());
+            display.DisplayValue(newValue);
         }
 
         private void Initialize()

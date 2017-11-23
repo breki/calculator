@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
 
 namespace Calculator
 {
@@ -25,6 +27,18 @@ namespace Calculator
         public void DisplayErrorMessage()
         {
             DisplayText(MsgError);
+        }
+
+        public void DisplayValue(decimal value)
+        {
+            Clear();
+            if (value == 0)
+                AddCharacter(CalculatorEngine.CharZero);
+            else
+            {
+                decimal roundedValue = Math.Round(value, 8);
+                AddCharacters(roundedValue.ToString(CultureInfo.InvariantCulture).ToCharArray());
+            }
         }
 
         public void Clear()

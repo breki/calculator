@@ -232,7 +232,7 @@ namespace Calculator.Tests
         }
 
         [Test]
-        public void UsesRoundingToLimitsHowManyCharactersAreDisplayed()
+        public void UsesRoundingToLimitHowManyCharactersAreDisplayed()
         {
             TypeInValue(2);
             PressTheDivideKey();
@@ -350,8 +350,8 @@ namespace Calculator.Tests
         private void AssertDisplayShowsValue(decimal expectedValue)
         {
             Assert.That(
-                ParseDecimalFromChars(display.Text.ToArray()), 
-                Is.EqualTo(expectedValue),
+                ParseDecimalFromChars(display.Text.ToArray()),
+                Is.EqualTo(Math.Round(expectedValue, 8)),
                 "Calculator display does not show the expected number.");
         }
 

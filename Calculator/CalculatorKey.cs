@@ -17,5 +17,7 @@
         Equals,
         Plus,
         Minus,
+        Multiply,
+        Divide,
     }
 }

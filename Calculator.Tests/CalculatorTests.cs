@@ -74,50 +74,56 @@ namespace Calculator.Tests
             AssertDisplayShowsZero();
         }
 
-        [Test]
-        public void PressingEqualsKeyAtStartDoesNothing()
+        [TestCase(CalculatorKey.Equals)]
+        [TestCase(CalculatorKey.Plus)]
+        [TestCase(CalculatorKey.Minus)]
+        [TestCase(CalculatorKey.Multiply)]
+        [TestCase(CalculatorKey.Divide)]
+        public void PressingOperatorKeyAtStartDoesNothing(CalculatorKey operatorKey)
         {
-            PressTheEqualsKey();
+            PressTheKey(operatorKey);
             AssertDisplayShowsZero();
         }
 
-        [Test]
-        public void PressingEqualsKeyAfterDigitsDoesNothing()
+        [TestCase(CalculatorKey.Equals)]
+        [TestCase(CalculatorKey.Plus)]
+        [TestCase(CalculatorKey.Minus)]
+        [TestCase(CalculatorKey.Multiply)]
+        [TestCase(CalculatorKey.Divide)]
+        public void EnteringDigitAfterOperatorKeyClearsThePreviousValueFromDisplay(
+            CalculatorKey operatorKey)
+        {
+            PressADigitKey();
+            PressTheKey(operatorKey);
+            char digit1 = PressADigitKey();
+            char digit2 = PressADigitKey();
+
+            AssertDisplayShowsChars(digit1, digit2);
+        }
+
+        [TestCase(CalculatorKey.Equals)]
+        [TestCase(CalculatorKey.Plus)]
+        [TestCase(CalculatorKey.Minus)]
+        [TestCase(CalculatorKey.Multiply)]
+        [TestCase(CalculatorKey.Divide)]
+        public void PressingOperatorKeyAfterDigitsDoesNothing(CalculatorKey operatorKey)
         {
             char digit1 = PressADigitKey();
             char dotChar = PressTheDotKey();
             char digit2 = PressADigitKey();
-            PressTheEqualsKey();
+            PressTheKey(operatorKey);
             AssertDisplayShowsChars(digit1, dotChar, digit2);
-        }
-
-        [Test]
-        public void PressingPlusKeyAtStartDoesNothing()
-        {
-            PressThePlusKey();
-            AssertDisplayShowsZero();
         }
 
         [Test]
         public void PressingPlusKeyAndThenEqualsDoublesTheValue()
         {
-            decimal expectedValue = EnterValue();
+            decimal enteredValue = EnterValue();
 
             PressThePlusKey();
             PressTheEqualsKey();
 
-            AssertDisplayShowsValue(expectedValue * 2);
-        }
-
-        [Test]
-        public void EnteringDigitAfterPlusClearsThePreviousValueFromDisplay()
-        {
-            PressADigitKey();
-            PressThePlusKey();
-            char digit1 = PressADigitKey();
-            char digit2 = PressADigitKey();
-
-            AssertDisplayShowsChars(digit1, digit2);
+            AssertDisplayShowsValue(enteredValue * 2);
         }
 
         [Test]
@@ -133,13 +139,6 @@ namespace Calculator.Tests
         }
 
         [Test]
-        public void PressingMinusKeyAtStartDoesNothing()
-        {
-            PressTheMinusKey();
-            AssertDisplayShowsZero();
-        }
-
-        [Test]
         public void PressingMinusKeyAndThenEqualsSetsValueToZero()
         {
             EnterValue();
@@ -147,17 +146,6 @@ namespace Calculator.Tests
             PressTheEqualsKey();
 
             AssertDisplayShowsZero();
-        }
-
-        [Test]
-        public void EnteringDigitAfterMinusClearsThePreviousValueFromDisplay()
-        {
-            PressADigitKey();
-            PressTheMinusKey();
-            char digit1 = PressADigitKey();
-            char digit2 = PressADigitKey();
-
-            AssertDisplayShowsChars(digit1, digit2);
         }
 
         [Test]
@@ -183,6 +171,62 @@ namespace Calculator.Tests
             PressTheEqualsKey();
 
             AssertDisplayShowsValue(Value1 - Value2);
+        }
+
+        [Test]
+        public void PressingMultiplyKeyAndThenEqualsSquaresTheValue()
+        {
+            decimal enteredValue = EnterValue();
+
+            PressTheMultiplyKey();
+            PressTheEqualsKey();
+
+            AssertDisplayShowsValue(enteredValue * enteredValue);
+        }
+
+        [Test]
+        public void EnteringValueMultiplyValueEqualsMultipliesValues()
+        {
+            decimal value1 = EnterValue();
+            PressTheMultiplyKey();
+            decimal value2 = EnterValue();
+
+            PressTheEqualsKey();
+
+            AssertDisplayShowsValue(value1 * value2);
+        }
+
+        [Test]
+        public void PressingDivideKeyAndThenEqualsDividesTheValueWithItself()
+        {
+            EnterValue();
+
+            PressTheDivideKey();
+            PressTheEqualsKey();
+
+            AssertDisplayShowsValue(1);
+        }
+
+        [Test]
+        public void EnteringValueDivideValueEqualsDividesValues()
+        {
+            decimal value1 = EnterValue();
+            PressTheDivideKey();
+            decimal value2 = EnterValue();
+
+            PressTheEqualsKey();
+
+            AssertDisplayShowsValue(value1 / value2);
+        }
+
+        [Test, Ignore("todo")]
+        public void DividingByZeroCausesTheDisplayToShowError()
+        {
+        }
+
+        [Test, Ignore("todo")]
+        public void LimitsHowManyCharactersAreDisplayed()
+        {
         }
 
         [SetUp]
@@ -245,6 +289,16 @@ namespace Calculator.Tests
             calculator.PressKey(CalculatorKey.Minus);
         }
 
+        private void PressTheMultiplyKey()
+        {
+            calculator.PressKey(CalculatorKey.Multiply);
+        }
+
+        private void PressTheDivideKey()
+        {
+            calculator.PressKey(CalculatorKey.Divide);
+        }
+
         private void PressTheKey(char keyChr)
         {
             if (char.IsDigit(keyChr))
@@ -253,6 +307,11 @@ namespace Calculator.Tests
                 calculator.PressKey(CalculatorKey.Dot);
             else
                 throw new ArgumentException();
+        }
+
+        private void PressTheKey(CalculatorKey key)
+        {
+            calculator.PressKey(key);
         }
 
         private static decimal ParseDecimalFromChars(params char[] expectedChars)

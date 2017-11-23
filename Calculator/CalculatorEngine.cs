@@ -22,6 +22,8 @@ namespace Calculator
             {
                 case CalculatorKey.Plus:
                 case CalculatorKey.Minus:
+                case CalculatorKey.Multiply:
+                case CalculatorKey.Divide:
                     HandleOperatorKey(keyPressed);
                     return;
 
@@ -53,6 +55,8 @@ namespace Calculator
 
         private void HandleEqualsKey()
         {
+            clearDisplayOnNextDigit = true;
+
             if (currentOperator == null)
                 return;
 
@@ -69,6 +73,14 @@ namespace Calculator
                     break;
                 case CalculatorKey.Minus:
                     newValue = -(valuesStack.Pop() - valuesStack.Pop());
+                    break;
+                case CalculatorKey.Multiply:
+                    newValue = valuesStack.Pop() * valuesStack.Pop();
+                    break;
+                case CalculatorKey.Divide:
+                    decimal divisor = valuesStack.Pop();
+                    decimal dividend = valuesStack.Pop();
+                    newValue = dividend / divisor;
                     break;
                 default:
                     throw new InvalidOperationException();
